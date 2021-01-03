@@ -194,13 +194,13 @@ void GameObject::LoadFromJson(JSON_Object* _obj)
 void GameObject::LoadComponents(JSON_Array* componentArray)
 {
 
-	JSON_Object* jsComponent = nullptr;
+	DEConfig jsComponent(nullptr);
 	for (size_t i = 1; i < json_array_get_count(componentArray); i++)
 	{
-		jsComponent = json_array_get_object(componentArray, i);
+		jsComponent.nObj = json_array_get_object(componentArray, i);
 
-		Component* comp = AddComponent((Component::Type)json_object_get_number(jsComponent, "Type"));
-		comp->LoadData(jsComponent);
+		Component* comp = AddComponent(static_cast<Component::Type>(jsComponent.ReadInt("Type")));
+		comp->LoadData(jsComponent.nObj);
 
 	}
 
