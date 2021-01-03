@@ -1,0 +1,37 @@
+{
+    "Model Objects": [
+        {
+            "name": "Torus",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1065605909,
+            "ParentUID": 2085253050,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2118360703.mmh",
+                    "UID": 2118360703
+                }
+            ]
+        }
+    ]
+}

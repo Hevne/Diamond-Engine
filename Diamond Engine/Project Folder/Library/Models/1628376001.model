@@ -1,0 +1,37 @@
+{
+    "Model Objects": [
+        {
+            "name": "Sphere",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                -0.7071068286895752,
+                0,
+                0,
+                0.70710670948028564
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 736986894,
+            "ParentUID": 458249006,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1736836885.mmh",
+                    "UID": 1736836885
+                }
+            ]
+        }
+    ]
+}
