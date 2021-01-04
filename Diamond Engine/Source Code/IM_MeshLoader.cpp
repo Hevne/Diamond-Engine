@@ -99,6 +99,7 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 			C_Material* material = dynamic_cast<C_Material*>(gmNode->AddComponent(Component::Type::Material));
 			material->matTexture = sceneTextures[importedMesh->mMaterialIndex];
 		}
+		//ANIMATION COMPONENT
 
 		PopulateTransform(gmNode, pos, rot, scale);
 	}
@@ -127,6 +128,7 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 	}
 
 }
+
 
 ResourceMesh* MeshLoader::LoadMesh(aiMesh* importedMesh, uint oldUID)
 {

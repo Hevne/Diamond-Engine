@@ -397,9 +397,6 @@
     <ClInclude Include="Source Code\DETime.h">
       <Filter>Sources\Tools\MMath</Filter>
     </ClInclude>
-    <ClInclude Include="Source Code\DEResource.h">
-      <Filter>Sources\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Source Code\RE_Texture.h">
       <Filter>Sources\Resources</Filter>
     </ClInclude>
@@ -483,6 +480,12 @@
     </ClInclude>
     <ClInclude Include="Source Code\CO_Transform.h">
       <Filter>Sources\Components\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\RE_Animation.h">
+      <Filter>Sources\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\IM_AnimationImporter.h">
+      <Filter>Sources\Tools\Importers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -746,6 +749,12 @@
     </ClCompile>
     <ClCompile Include="Source Code\CO_Transform.cpp">
       <Filter>Sources\Components\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\RE_Animation.cpp">
+      <Filter>Sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\IM_AnimationImporter.cpp">
+      <Filter>Sources\Tools\Importers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

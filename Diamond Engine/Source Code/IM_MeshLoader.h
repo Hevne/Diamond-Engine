@@ -8,6 +8,7 @@ class aiNode;
 class aiMesh;
 class GameObject;
 class ResourceTexture;
+class ResourceAnimation;
 typedef unsigned int uint;
 
 //Change this to file system

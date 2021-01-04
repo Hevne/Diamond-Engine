@@ -58,6 +58,7 @@ bool M_FileSystem::Start()
 	//TODO: Should be updated kinda like assetsRoot;
 	//TODO: Add Library/ to gitignore?
 	GetAllFilesRecursive(App->moduleResources->meshesLibraryRoot);
+	GetAllFilesRecursive(App->moduleResources->animationsLibraryRoot);
 
 	return true;
 }

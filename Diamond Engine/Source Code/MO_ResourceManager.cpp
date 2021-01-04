@@ -14,11 +14,12 @@
 
 #include"RE_Texture.h"
 #include"RE_Mesh.h"
+#include"RE_Animation.h"
 #include"DEJsonSupport.h"
 //#include"DEResource.h"
 
 M_ResourceManager::M_ResourceManager(Application* app, bool start_enabled) : Module(app, start_enabled), assetsRoot("Assets", "Assets", 0, true),
-fileCheckTime(0.f), fileUpdateDelay(2.f), meshesLibraryRoot("Meshes", "Library/Meshes", 0, true)
+fileCheckTime(0.f), fileUpdateDelay(2.f), meshesLibraryRoot("Meshes", "Library/Meshes", 0, true),animationsLibraryRoot("Animations", "Library/Animations",0,true)
 {
 }
 
@@ -35,6 +36,7 @@ bool M_ResourceManager::Start()
 {
 	assetsRoot.lastModTime = App->moduleFileSystem->GetLastModTime(assetsRoot.importPath.c_str());
 	meshesLibraryRoot.lastModTime = App->moduleFileSystem->GetLastModTime(meshesLibraryRoot.importPath.c_str());
+	animationsLibraryRoot.lastModTime = App->moduleFileSystem->GetLastModTime(animationsLibraryRoot.importPath.c_str());
 	return true;
 }
 
@@ -167,6 +169,13 @@ void M_ResourceManager::UpdateMeshesDisplay()
 	LOG(LogType::L_WARNING, "Mesh display updated");
 }
 
+void M_ResourceManager::UpdateAnimationsDisplay()
+{
+	animationsLibraryRoot.childDirs.clear();
+	App->moduleFileSystem->GetAllFilesRecursive(animationsLibraryRoot);
+	LOG(LogType::L_WARNING, "Animations display updated");
+}
+
 //Returns a resource* if the resource is loaded or creates a new resource from the library file
 Resource* M_ResourceManager::RequestResource(int uid, const char* libraryPath)
 {
@@ -183,7 +192,7 @@ Resource* M_ResourceManager::RequestResource(int uid, const char* libraryPath)
 	{
 		Resource* ret = nullptr;
 
-		static_assert(static_cast<int>(Resource::Type::UNKNOWN) == 4, "Update all switches with new type");
+		static_assert(static_cast<int>(Resource::Type::UNKNOWN) == 5, "Update all switches with new type");
 
 		//Save check
 		if (FileSystem::Exists(libraryPath))
@@ -298,13 +307,14 @@ Resource* M_ResourceManager::CreateNewResource(const char* assetsFile, uint uid,
 {
 	Resource* ret = nullptr;
 
-	static_assert(static_cast<int>(Resource::Type::UNKNOWN) == 4, "Update all switches with new type");
+	static_assert(static_cast<int>(Resource::Type::UNKNOWN) == 5, "Update all switches with new type");
 	switch (type) 
 	{
 		case Resource::Type::SCENE : ret = new Resource(uid, Resource::Type::SCENE); break;
 		case Resource::Type::TEXTURE: ret = (Resource*) new ResourceTexture(uid); break;
 		case Resource::Type::MODEL: ret = new Resource(uid, Resource::Type::MODEL); break;
 		case Resource::Type::MESH: ret = (Resource*) new ResourceMesh(uid); break;
+		case Resource::Type::ANIMATION: ret = (Resource*) new ResourceAnimation(uid); break;
 	}
 
 	if (ret != nullptr)
@@ -322,7 +332,7 @@ Resource* M_ResourceManager::LoadFromLibrary(const char* libraryFile, Resource::
 {
 	Resource* ret = nullptr;
 
-	static_assert(static_cast<int>(Resource::Type::UNKNOWN) == 4, "Update all switches with new type");
+	static_assert(static_cast<int>(Resource::Type::UNKNOWN) == 5, "Update all switches with new type");
 
 	int uid = _uid;
 	switch (type)
@@ -370,6 +380,7 @@ std::string M_ResourceManager::GenLibraryPath(uint _uid, Resource::Type _type)
 		case Resource::Type::MODEL: ret = MODELS_PATH; ret += nameNoExt; ret += ".model"; break;
 		case Resource::Type::MESH: ret = MESHES_PATH; ret += nameNoExt; ret += ".mmh"; break;
 		case Resource::Type::SCENE : ret = SCENES_PATH; ret += nameNoExt; ret += ".des"; break;
+		case Resource::Type::ANIMATION: ret = ANIMATIONS_PATH; ret += nameNoExt; ret += ".anim"; break;
 	}
 
 	return ret;

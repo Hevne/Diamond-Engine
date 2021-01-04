@@ -20,6 +20,7 @@ void W_Assets::Draw()
 	{
 		DrawFileTree(EngineExternal->moduleResources->assetsRoot);
 		DrawFileTree(EngineExternal->moduleResources->meshesLibraryRoot);
+		DrawFileTree(EngineExternal->moduleResources->animationsLibraryRoot);
 
 		if (selectedFile != nullptr && /*ImGui::IsWindowHovered() &&*/ EngineExternal->moduleInput->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN) 
 		{

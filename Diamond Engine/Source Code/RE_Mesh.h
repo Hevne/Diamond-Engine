@@ -4,7 +4,7 @@
 #include <vector>
 #include<string>
 
-#include"MathGeoLib/include/Geometry/AABB.h"
+#include"MathGeoLib\include\MathGeoLib.h"
 #include"DEResource.h"
 
 typedef unsigned int GLuint;

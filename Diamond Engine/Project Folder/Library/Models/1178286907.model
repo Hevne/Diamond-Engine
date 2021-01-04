@@ -1,0 +1,118 @@
+{
+    "Model Objects": [
+        {
+            "name": "simpleAnimation",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 34472350,
+            "ParentUID": 318848809,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "pCube1",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1260245651,
+            "ParentUID": 34472350,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1784920494.mmh",
+                    "UID": 1784920494
+                }
+            ]
+        },
+        {
+            "name": "joint1_$AssimpFbx$_Translation",
+            "Position": [
+                3.2287700176239014,
+                0,
+                0.029650591313838959
+            ],
+            "Rotation": [
+                0,
+                0.99999511241912842,
+                0,
+                -0.0031181960366666317
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1970586439,
+            "ParentUID": 34472350,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "joint2_$AssimpFbx$_Translation",
+            "Position": [
+                3.3610281944274902,
+                0,
+                -3.2678720840451092e-14
+            ],
+            "Rotation": [
+                0,
+                0.38611462712287903,
+                0,
+                0.92245084047317505
+            ],
+            "Scale": [
+                0.99999988079071045,
+                1,
+                0.99999988079071045
+            ],
+            "UID": 58197377,
+            "ParentUID": 1970586439,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        }
+    ]
+}

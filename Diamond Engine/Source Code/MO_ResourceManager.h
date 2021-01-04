@@ -44,6 +44,7 @@ public:
 	std::string GenLibraryPath(uint _uid, Resource::Type _type);
 
 	void UpdateMeshesDisplay();
+	void UpdateAnimationsDisplay();
 	void NeedsDirsUpdate(AssetDir& dir);
 
 private:
@@ -63,4 +64,5 @@ private:
 public:
 	AssetDir assetsRoot;
 	AssetDir meshesLibraryRoot;
+	AssetDir animationsLibraryRoot;
 };

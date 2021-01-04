@@ -186,6 +186,7 @@
     <ClInclude Include="Source Code\External Libraries\mmgr\mmgr.h" />
     <ClInclude Include="Source Code\External Libraries\mmgr\nommgr.h" />
     <ClInclude Include="Source Code\External Libraries\parson\parson.h" />
+    <ClInclude Include="Source Code\IM_AnimationImporter.h" />
     <ClInclude Include="Source Code\IM_FileSystem.h" />
     <ClInclude Include="Source Code\GameObject.h" />
     <ClInclude Include="Source Code\glmath.h" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Source Code\Light.h" />
     <ClInclude Include="Source Code\MaykMath.h" />
     <ClInclude Include="Source Code\DEModelNode.h" />
+    <ClInclude Include="Source Code\RE_Animation.h" />
     <ClInclude Include="Source Code\RE_Mesh.h" />
     <ClInclude Include="Source Code\MeshArrays.h" />
     <ClInclude Include="Source Code\IM_MeshLoader.h" />
@@ -210,7 +212,6 @@
     <ClInclude Include="Source Code\MO_Scene.h" />
     <ClInclude Include="Source Code\OpenGL.h" />
     <ClInclude Include="Source Code\Primitive.h" />
-    <ClInclude Include="Source Code\DEResource.h" />
     <ClInclude Include="Source Code\RE_Texture.h" />
     <ClInclude Include="Source Code\Timer.h" />
     <ClInclude Include="Source Code\Window.h" />
@@ -280,11 +281,13 @@
     <ClCompile Include="Source Code\External Libraries\MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Source Code\External Libraries\mmgr\mmgr.cpp" />
     <ClCompile Include="Source Code\External Libraries\parson\parson.c" />
+    <ClCompile Include="Source Code\IM_AnimationImporter.cpp" />
     <ClCompile Include="Source Code\IM_FileSystem.cpp" />
     <ClCompile Include="Source Code\GameObject.cpp" />
     <ClCompile Include="Source Code\glmath.cpp" />
     <ClCompile Include="Source Code\IM_ModelImporter.cpp" />
     <ClCompile Include="Source Code\IM_TextureImporter.cpp" />
+    <ClCompile Include="Source Code\RE_Animation.cpp" />
     <ClCompile Include="Source Code\RE_Mesh.cpp" />
     <ClCompile Include="Source Code\IM_MeshLoader.cpp" />
     <ClCompile Include="Source Code\MO_FileSystem.cpp" />
