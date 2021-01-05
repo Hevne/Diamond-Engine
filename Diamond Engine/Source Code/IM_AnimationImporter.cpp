@@ -79,6 +79,8 @@ ResourceAnimation* AnimationLoader::LoadAnimation(aiAnimation* importedAnimation
 		}
 		anim->channels[channel.boneName] = channel;
 	}
+
+
 	//Save animation own format
 	char* buffer;
 	uint size = anim->SaveCustomFormat(anim, &buffer);

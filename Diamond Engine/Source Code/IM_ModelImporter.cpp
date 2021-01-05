@@ -93,6 +93,7 @@ void ModelImporter::Import(char* buffer, int bSize, Resource* res)
 
 		if (scene->HasAnimations())
 		{
+
 			for (unsigned int i = 0; i < scene->mNumAnimations; i++)
 			{
 				aiAnimation* anim = scene->mAnimations[i];

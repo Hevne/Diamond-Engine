@@ -5,6 +5,7 @@
 #include "CO_MeshRenderer.h"
 #include "CO_Material.h"
 #include "CO_Camera.h"
+#include "CO_Animator.h"
 
 #include"MaykMath.h"
 #include"parson/parson.h"
@@ -84,6 +85,9 @@ Component* GameObject::AddComponent(Component::Type _type)
 		break;
 	case Component::Type::Camera:
 		ret = new C_Camera(this);
+		break;
+	case Component::Type::Animator:
+		ret = new C_Animator(this);
 		break;
 	}
 

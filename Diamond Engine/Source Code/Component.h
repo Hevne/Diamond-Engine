@@ -17,6 +17,7 @@ public:
 		Material,
 		Camera,
 		Count,
+		Animator,
 	};
 
 	Component(GameObject* _gm);
