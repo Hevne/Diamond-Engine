@@ -1,7 +1,7 @@
 {
     "Model Objects": [
         {
-            "name": "simpleAnimation",
+            "name": "RootNode",
             "Position": [
                 0,
                 0,
@@ -18,8 +18,8 @@
                 1,
                 1
             ],
-            "UID": 34472350,
-            "ParentUID": 318848809,
+            "UID": 1116457865,
+            "ParentUID": 1608138010,
             "Components": [
                 {
                     "Type": 1,
@@ -45,8 +45,8 @@
                 1,
                 1
             ],
-            "UID": 1260245651,
-            "ParentUID": 34472350,
+            "UID": 742416000,
+            "ParentUID": 1116457865,
             "Components": [
                 {
                     "Type": 1,
@@ -55,13 +55,13 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/1784920494.mmh",
-                    "UID": 1784920494
+                    "Path": "Library\/Meshes\/482421386.mmh",
+                    "UID": 482421386
                 }
             ]
         },
         {
-            "name": "joint1_$AssimpFbx$_Translation",
+            "name": "joint1",
             "Position": [
                 3.2287700176239014,
                 0,
@@ -78,8 +78,8 @@
                 1,
                 1
             ],
-            "UID": 1970586439,
-            "ParentUID": 34472350,
+            "UID": 2107920004,
+            "ParentUID": 1116457865,
             "Components": [
                 {
                     "Type": 1,
@@ -88,7 +88,7 @@
             ]
         },
         {
-            "name": "joint2_$AssimpFbx$_Translation",
+            "name": "joint2",
             "Position": [
                 3.3610281944274902,
                 0,
@@ -105,8 +105,8 @@
                 1,
                 0.99999988079071045
             ],
-            "UID": 58197377,
-            "ParentUID": 1970586439,
+            "UID": 761129798,
+            "ParentUID": 2107920004,
             "Components": [
                 {
                     "Type": 1,

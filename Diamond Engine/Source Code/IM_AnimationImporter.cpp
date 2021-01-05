@@ -46,7 +46,13 @@ ResourceAnimation* AnimationLoader::LoadAnimation(aiAnimation* importedAnimation
 	for (int i = 0; i < importedAnimation->mNumChannels; i++)
 	{
 		Channel channel;
+
 		channel.boneName = importedAnimation->mChannels[i]->mNodeName.C_Str();
+		uint pos = channel.boneName.find("_$AssimpFbx$_");
+		if (pos != std::string::npos)
+		{
+			channel.boneName = channel.boneName.substr(0, pos);
+		}
 
 		for (int j = 0; j < importedAnimation->mChannels[i]->mNumPositionKeys; j++)
 		{

@@ -116,7 +116,7 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 		}
 		else
 		{
-			rootGO = new GameObject(holderName, gmParent);
+			rootGO = new GameObject(nodeName.c_str(), gmParent);
 			PopulateTransform(rootGO, pos, rot, scale);
 		}
 
