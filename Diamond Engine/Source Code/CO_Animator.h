@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include <iterator>
 #include <vector>
 #include <map>
 #include <string>
@@ -22,6 +23,11 @@ public:
 
 	void SaveData(JSON_Object* nObj) override;
 	void LoadData(JSON_Object* nObj) override;
+
+	bool OnEditor() override;
+
+	void LinkChannelBones(GameObject* gameObject);
+	void StoreBoneMapping(GameObject* gameObject);
 
 	void SetAnimation(ResourceAnimation* anim);
 	//void DrawLinkedBones() const;
@@ -60,7 +66,7 @@ private:
 	float blendTime = 0.0f;
 	float blendTimeDuration = 0.0f;
 
-	bool channelsLinked = false;
+	bool channeIsLinked = false;
 	bool bonesLinked = false;
 
 private:

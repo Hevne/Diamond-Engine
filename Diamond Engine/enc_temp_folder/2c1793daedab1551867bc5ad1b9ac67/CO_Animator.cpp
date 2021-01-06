@@ -19,9 +19,8 @@
 #include"MathGeoLib/include/Geometry/Frustum.h"
 #include"MathGeoLib/include/Geometry/Plane.h"
 
-C_Animator::C_Animator(GameObject* gameobject) : Component(gameobject)
+C_Animator::C_Animator(GameObject* gameObject) : Component(gameObject)
 {
-	gameObject = gameobject;
 	name = "Animator Component";
 }
 
