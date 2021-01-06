@@ -57,7 +57,7 @@ void C_Animator::LoadData(JSON_Object* nObj)
 		return;
 	else
 	{
-		LinkChannelBones(gameObject);
+		//LinkChannelBones(gameObject);
 	}
 }
 
