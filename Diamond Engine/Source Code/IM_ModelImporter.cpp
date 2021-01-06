@@ -93,7 +93,6 @@ void ModelImporter::Import(char* buffer, int bSize, Resource* res)
 
 		if (scene->HasAnimations())
 		{
-
 			for (unsigned int i = 0; i < scene->mNumAnimations; i++)
 			{
 				aiAnimation* anim = scene->mAnimations[i];
@@ -115,7 +114,8 @@ void ModelImporter::Import(char* buffer, int bSize, Resource* res)
 		FileSystem::GetFileName(res->GetAssetPath(), name, false);
 
 		MeshLoader::NodeToGameObject(scene->mMeshes, texturesOnModelUIDs, meshesOnModelUIDs, scene->mRootNode, root, name.c_str());
-		
+		AnimationLoader::SetAnimationOnGameObjectRoot(scene->mAnimations, animationsOnModelUIDs, root->children[0]);
+
 		SaveModelCustom(root->children[0], res->GetLibraryPath());
 		delete root;
 

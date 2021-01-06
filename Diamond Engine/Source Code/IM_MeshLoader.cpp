@@ -6,6 +6,7 @@
 #include "CO_Transform.h"
 #include "CO_MeshRenderer.h"
 #include "CO_Material.h"
+#include "CO_Animator.h"
 
 #include "RE_Mesh.h"
 #include "RE_Texture.h"
@@ -81,7 +82,6 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 		}
 	}
 
-
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		ResourceMesh* meshPointer = _sceneMeshes[node->mMeshes[i]];
@@ -99,8 +99,6 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 			C_Material* material = dynamic_cast<C_Material*>(gmNode->AddComponent(Component::Type::Material));
 			material->matTexture = sceneTextures[importedMesh->mMaterialIndex];
 		}
-		//ANIMATION COMPONENT
-
 		PopulateTransform(gmNode, pos, rot, scale);
 	}
 
@@ -126,7 +124,6 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 			NodeToGameObject(meshArray, sceneTextures, _sceneMeshes, node->mChildren[i], rootGO, node->mChildren[i]->mName.C_Str());
 		}
 	}
-
 }
 
 

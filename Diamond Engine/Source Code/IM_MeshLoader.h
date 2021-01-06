@@ -6,6 +6,7 @@
 class ResourceMesh;
 class aiNode;
 class aiMesh;
+class aiAnimation;
 class GameObject;
 class ResourceTexture;
 class ResourceAnimation;

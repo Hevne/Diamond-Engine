@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "CO_Transform.h"
+#include "CO_Animator.h"
 
 #include "RE_Animation.h"
 
@@ -27,6 +28,74 @@ void  AnimationLoader::logCallback(const char* message, char* user)
 	EngineExternal->moduleEditor->LogToConsole(message);
 }
 
+uint AnimationLoader::SaveCustomFormat(ResourceAnimation* animation, char** buffer)
+{
+	uint size = sizeof(float) + sizeof(float) + sizeof(uint);
+
+	//Channels size 
+	std::map<std::string, Channel>::const_iterator it;
+	for (it = animation->channels.begin(); it != animation->channels.end(); ++it)
+		size += AnimationLoader::GetChannelsSize(it->second);
+
+	//Allocate buffer size
+	*buffer = new char[size];
+	char* cursor = *buffer;
+
+	//Duration
+	memcpy(cursor, &animation->duration, sizeof(float));
+	cursor += sizeof(float);
+
+	//Ticks per second
+	memcpy(cursor, &animation->ticksPerSecond, sizeof(float));
+	cursor += sizeof(float);
+
+	//Channels number
+	uint channelsSize = animation->channels.size();
+	memcpy(cursor, &channelsSize, sizeof(uint));
+	cursor += sizeof(uint);
+
+	//Save each channel data
+	for (it = animation->channels.begin(); it != animation->channels.end(); ++it)
+		AnimationLoader::SaveChannels(it->second, &cursor);
+
+	return size;
+}
+
+ResourceAnimation* AnimationLoader::LoadCustomFormat(const char* path)
+{
+	char* buffer = nullptr;
+
+	uint size = FileSystem::LoadToBuffer(path, &buffer);
+
+	const char* cursor = buffer;
+	uint bytes;
+
+	//Empty animation
+	ResourceAnimation* anim = dynamic_cast<ResourceAnimation*>(EngineExternal->moduleResources->CreateNewResource("", 0, Resource::Type::ANIMATION));
+
+	//Fills Duration
+	memcpy(&anim->duration, cursor, sizeof(float));
+	cursor += sizeof(float);
+
+	//Fills Ticks per second
+	memcpy(&anim->ticksPerSecond, cursor, sizeof(float));
+	cursor += sizeof(float);
+
+	//Fills Channels number
+	uint channelsSize = 0;
+	memcpy(&channelsSize, cursor, sizeof(uint));
+	cursor += sizeof(uint);
+
+	//Fills channels
+	for (uint i = 0; i < channelsSize; ++i)
+	{
+		Channel Channelat;
+		AnimationLoader::LoadChannels(Channelat, &cursor);
+		anim->channels[Channelat.boneName.c_str()] = Channelat;
+	}
+	return anim;
+}
+
 ResourceAnimation* AnimationLoader::LoadAnimation(aiAnimation* importedAnimation, uint oldUID)
 {
 	uint UID = oldUID;
@@ -43,6 +112,7 @@ ResourceAnimation* AnimationLoader::LoadAnimation(aiAnimation* importedAnimation
 	anim->ticksPerSecond = importedAnimation->mTicksPerSecond;
 	anim->duration = importedAnimation->mDuration;
 
+	//Import from Assimp
 	for (int i = 0; i < importedAnimation->mNumChannels; i++)
 	{
 		Channel channel;
@@ -80,13 +150,19 @@ ResourceAnimation* AnimationLoader::LoadAnimation(aiAnimation* importedAnimation
 		anim->channels[channel.boneName] = channel;
 	}
 
-
 	//Save animation own format
 	char* buffer;
-	uint size = anim->SaveCustomFormat(anim, &buffer);
-	
+	uint size = SaveCustomFormat(anim, &buffer);
+
 	FileSystem::Save(file.c_str(), buffer, size, false);
+
+	std::string file_name = std::to_string(UID);
+	file_name += ".anim";
+
 	RELEASE_ARRAY(buffer);
+	FileSystem::Load(ANIMATIONS_PATH, file_name.c_str(), &buffer);
+	 
+	ResourceAnimation* loaded_animation =LoadCustomFormat(buffer);
 
 	return anim;
 }
@@ -106,7 +182,6 @@ uint AnimationLoader::GetChannelsSize(const Channel& channel)
 
 void AnimationLoader::SaveChannels(const Channel& channel, char** cursor)
 {
-	//Name (size and string)
 	uint nameSize = channel.boneName.size();
 	memcpy(*cursor, &nameSize, sizeof(uint));
 	*cursor += sizeof(uint);
@@ -119,12 +194,13 @@ void AnimationLoader::SaveChannels(const Channel& channel, char** cursor)
 	memcpy(*cursor, ranges, sizeof(uint) * 3);
 	*cursor += sizeof(uint) * 3;
 
-	SaveChannelKeys(channel.positionKeys, cursor);
-	SaveChannelKeys(channel.rotationKeys, cursor);
-	SaveChannelKeys(channel.scaleKeys, cursor);
+	//Save each channel, depending on float or quat based
+	SaveChanKeys(channel.positionKeys, cursor);
+	SaveChanKeys(channel.rotationKeys, cursor);
+	SaveChanKeys(channel.scaleKeys, cursor);
 }
 
-void AnimationLoader::SaveChannelKeys(const std::map<double, float3>& map, char** cursor)
+void AnimationLoader::SaveChanKeys(const std::map<double, float3>& map, char** cursor)
 {
 	std::map<double, float3>::const_iterator it = map.begin();
 	for (it = map.begin(); it != map.end(); it++)
@@ -137,7 +213,7 @@ void AnimationLoader::SaveChannelKeys(const std::map<double, float3>& map, char*
 	}
 }
 
-void AnimationLoader::SaveChannelKeys(const std::map<double, Quat>& map, char** cursor)
+void AnimationLoader::SaveChanKeys(const std::map<double, Quat>& map, char** cursor)
 {
 	std::map<double, Quat>::const_iterator it = map.begin();
 	for (it = map.begin(); it != map.end(); it++)
@@ -147,5 +223,78 @@ void AnimationLoader::SaveChannelKeys(const std::map<double, Quat>& map, char** 
 
 		memcpy(*cursor, &it->second, sizeof(float) * 4);
 		*cursor += sizeof(float) * 4;
+	}
+}
+
+void AnimationLoader::LoadChannels(Channel& channel, const char** cursor)
+{
+	uint bytes = 0;
+
+	uint nameSize = 0;
+	memcpy(&nameSize, *cursor, sizeof(uint));
+	*cursor += sizeof(uint);
+
+	if (nameSize > 0)
+	{
+		char* string = new char[nameSize + 1];
+		bytes = sizeof(char) * nameSize;
+		memcpy(string, *cursor, bytes);
+		*cursor += bytes;
+		string[nameSize] = '\0';
+		channel.boneName = string;
+		RELEASE_ARRAY(string);
+	}
+
+	//Ranges
+	uint ranges[3];
+	memcpy(&ranges, *cursor, sizeof(uint) * 3);
+	*cursor += sizeof(uint) * 3;
+
+	LoadChanKeys(channel.positionKeys, cursor, ranges[0]);
+	LoadChanKeys(channel.rotationKeys, cursor, ranges[1]);
+	LoadChanKeys(channel.scaleKeys, cursor, ranges[2]);
+}
+
+void AnimationLoader::LoadChanKeys(std::map<double, float3>& map, const char** cursor, uint size)
+{
+	for (uint i = 0; i < size; i++)
+	{
+		double time;
+		memcpy(&time, *cursor, sizeof(double));
+		*cursor += sizeof(double);
+		float data[3];
+		memcpy(&data, *cursor, sizeof(float) * 3);
+		*cursor += sizeof(float) * 3;
+
+		map[time] = float3(data);
+	}
+}
+
+void AnimationLoader::LoadChanKeys(std::map<double, Quat>& map, const char** cursor, uint size)
+{
+	for (uint i = 0; i < size; i++)
+	{
+		double time;
+		memcpy(&time, *cursor, sizeof(double));
+		*cursor += sizeof(double);
+		float data[4];
+		memcpy(&data, *cursor, sizeof(float) * 4);
+		*cursor += sizeof(float) * 4;
+
+		map[time] = Quat(data);
+	}
+}
+
+void AnimationLoader::SetAnimationOnGameObjectRoot(aiAnimation** animArray, std::vector<ResourceAnimation*>& _sceneAnimations, GameObject* gmRoot)
+{
+	for (int i = 0; i < _sceneAnimations.size(); i++)
+	{
+		aiAnimation* importedAnim = animArray[i];
+
+		if (importedAnim->mDuration != 0)
+		{
+			C_Animator* animator = dynamic_cast<C_Animator*>(gmRoot->AddComponent(Component::Type::Animator));
+			animator->SetResource(_sceneAnimations[i]);
+		}
 	}
 }

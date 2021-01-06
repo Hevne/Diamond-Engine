@@ -18,6 +18,12 @@ public:
 	C_Animator(GameObject* gameObject);
 	~C_Animator();
 
+	void SetResource(ResourceAnimation* re_anim);
+
+	void SaveData(JSON_Object* nObj) override;
+	void LoadData(JSON_Object* nObj) override;
+
+	void SetAnimation(ResourceAnimation* anim);
 	//void DrawLinkedBones() const;
 
 	//void Start();
@@ -57,5 +63,7 @@ private:
 	bool channelsLinked = false;
 	bool bonesLinked = false;
 
+private:
+	ResourceAnimation* _anim;
 };
 

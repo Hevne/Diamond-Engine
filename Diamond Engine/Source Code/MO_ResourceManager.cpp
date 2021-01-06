@@ -203,6 +203,7 @@ Resource* M_ResourceManager::RequestResource(int uid, const char* libraryPath)
 				//case Resource::Type::MODEL: ret = (Resource*) new ResourceMesh(uid); break;
 				case Resource::Type::MESH: ret = (Resource*) new ResourceMesh(uid); break;
 				//case Resource::Type::SCENE : ret = (Resource*) new ResourceScene(uid); break;
+				case Resource::Type::ANIMATION: ret = (Resource*) new ResourceAnimation(uid); break;
 			}
 
 			if (ret != nullptr)
@@ -511,6 +512,8 @@ Resource::Type M_ResourceManager::GetTypeFromLibraryExtension(const char* librar
 		return Resource::Type::MESH;
 	if (ext == "des")
 		return Resource::Type::SCENE;
+	if (ext == "anim")
+		return Resource::Type::ANIMATION;
 
 	return Resource::Type::UNKNOWN;
 }
