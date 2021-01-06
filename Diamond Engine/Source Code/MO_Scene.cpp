@@ -230,6 +230,7 @@ void M_Scene::LoadModelTree(const char* modelPath)
 	{
 		parent = LoadGOData(json_array_get_object(sceneGO, i), parent);
 	}
+	//EUDALD LINK
 
 	//Free memory
 	json_value_free(scene);

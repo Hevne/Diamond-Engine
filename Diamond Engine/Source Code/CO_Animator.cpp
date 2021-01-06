@@ -100,9 +100,15 @@ bool C_Animator::OnEditor()
 			{
 				ImGui::Text("Bones Linked: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "false");
 			}
-			
 
 			ImGui::Spacing();
+
+			if (ImGui::Button("Link channels to bones"))
+				LinkChannelBones(gameObject);
+		
+
+			ImGui::Spacing();
+
 			ImGui::Text("Path: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%s", _anim->GetLibraryPath());
 		}
 		return true;
@@ -139,3 +145,10 @@ void C_Animator::SetAnimation(ResourceAnimation* anim)
 {
 	_anim = anim;
 }
+
+void C_Animator::Update()
+{
+	int i = 0;
+}
+
+
