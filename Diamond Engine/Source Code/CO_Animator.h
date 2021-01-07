@@ -79,6 +79,8 @@ private:
 	bool channeIsLinked = false;
 	bool bonesLinked = false;
 
+	uint currentTimeAnimation = 0;
+
 private:
 	ResourceAnimation* _anim;
 };

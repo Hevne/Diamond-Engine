@@ -63,8 +63,8 @@ void C_Animator::Update(float dt)
 		ResourceAnimation* currentAnimation = _anim;
 
 		time += dt;
-
-		if (currentAnimation && time > currentAnimation->duration) {
+		currentTimeAnimation = time * currentAnimation->ticksPerSecond;
+		if (currentAnimation && currentTimeAnimation > currentAnimation->duration) {
 			if (currentAnimation->loopable == true) {
 				time = 0.0f;
 			}
@@ -117,7 +117,7 @@ bool C_Animator::OnEditor()
 			ImGui::Text("Previous Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", previous_animation);
 			ImGui::Text("Current Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", current_animation);
 			ImGui::Text("Previous Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%f", prevAnimTime);
-			ImGui::Text("Current Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%f", time);
+			ImGui::Text("Current Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", currentTimeAnimation);
 			ImGui::Text("blendTime: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", blendTime);
 
 			ImGui::Spacing();
@@ -195,8 +195,8 @@ void C_Animator::SetAnimation(ResourceAnimation* anim)
 
 void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, const ResourceAnimation* blend, float blendRatio)
 {
-	uint currentFrame = settings->ticksPerSecond * time;
-
+	uint currentFrame = currentTimeAnimation;
+	//LOG(LogType::L_NORMAL, "%i", currentFrame);
 	uint prevBlendFrame = 0;
 	if (blend != nullptr)
 	{
@@ -211,6 +211,7 @@ void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, cons
 		if (settings->channels.find(boneIt->first.c_str()) == settings->channels.end()) continue;
 
 		const Channel& channel = settings->channels.find(boneIt->first.c_str())->second;
+	
 		//float3 position = GetChannelPosition(channel, currentFrame, transform->position);
 		//float3 position = transform->position;
 		//std::map<double, float3>::const_iterator previous = channel.positionKeys.lower_bound(currentFrame);
@@ -232,6 +233,7 @@ void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, cons
 		
 		//transform->position = position;
 		transform->rotation = rotation;
+		transform->updateTransform = true;
 		//transform->localScale = scale;
 	}
 }
@@ -248,14 +250,16 @@ Quat C_Animator::GetChannelRotation(const Channel& channel, float currentKey, Qu
 		if (next == channel.rotationKeys.end())
 			next = previous;
 
+		Quat quatLog = previous->second;
+		LOG(LogType::L_NORMAL, "Frame: %2.f Quat(%f,%f,%f,%f)", previous->first,quatLog.x,quatLog.y,quatLog.z,quatLog.w);
 		//If both keys are the same, no need to blend
 		if (previous == next)
 			rotation = previous->second;
 		else //blend between both keys
 		{
 			//0 to 1
-			float ratio = (currentKey - previous->first) / (next->first - previous->first);
-			rotation = previous->second.Slerp(next->second, ratio);
+			//float ratio = (currentKey - previous->first) / (next->first - previous->first);
+			rotation = previous->second;//.Slerp(next->second, ratio);
 		}
 	}
 	return rotation;
