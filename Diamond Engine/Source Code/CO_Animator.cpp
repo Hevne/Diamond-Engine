@@ -232,7 +232,7 @@ void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, cons
 
 		
 		//transform->position = position;
-		transform->rotation = rotation;
+		transform->eulerRotation = rotation.ToEulerXYZ() * RADTODEG;
 		transform->updateTransform = true;
 		//transform->localScale = scale;
 	}

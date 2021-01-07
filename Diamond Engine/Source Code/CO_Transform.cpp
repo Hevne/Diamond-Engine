@@ -89,7 +89,7 @@ bool C_Transform::OnEditor()
 
 		ImGui::Text("Rotation: ");
 		ImGui::SameLine();
-		ImGui::Text("%f, %f, %f", globalTransform.ToEulerXYZ().x, globalTransform.ToEulerXYZ().y, globalTransform.ToEulerXYZ().z);
+		ImGui::Text("%f, %f, %f", rotation.x, rotation.y, rotation.z);
 
 
 		ImGui::Text("Scale: ");
