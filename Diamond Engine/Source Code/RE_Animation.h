@@ -31,7 +31,8 @@ public:
 	bool LoadToMemory() override;
 	bool UnloadFromMemory() override;
 
-
+	uint SaveCustomFormat(ResourceAnimation* animation, char** buffer);
+	void LoadCustomFormat(const char* path);
 
 public:
 

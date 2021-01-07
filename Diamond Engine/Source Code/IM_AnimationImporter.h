@@ -16,9 +16,6 @@ namespace AnimationLoader
 {
 	void logCallback(const char* message, char* user);
 
-	uint SaveCustomFormat(ResourceAnimation* animation, char** buffer);
-	ResourceAnimation* LoadCustomFormat(const char* path);
-
 	ResourceAnimation* LoadAnimation(aiAnimation* importedAnimation, uint oldUID = 0);
 	uint GetChannelsSize(const Channel& channel);
 
@@ -29,7 +26,6 @@ namespace AnimationLoader
 	void LoadChannels(Channel& channel, const char** cursor);
 	void LoadChanKeys(std::map<double, float3>& map, const char** cursor, uint size);
 	void LoadChanKeys(std::map<double, Quat>& map, const char** cursor, uint size);
-
 
 	void SetAnimationOnGameObjectRoot(aiAnimation** animArray, std::vector<ResourceAnimation*>& _sceneAnimations, GameObject* gmRoot);
 }

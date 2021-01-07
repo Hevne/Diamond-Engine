@@ -34,6 +34,49 @@ C_Animator::~C_Animator()
 	}
 }
 
+void C_Animator::Start()
+{
+	//hard coded first bone
+	rootBone = gameObject->children[1];
+	//gameObject->children[0]->GetComponent<C_Mesh>()->rootBone = rootBone;
+
+	if (rootBone == nullptr) return;
+
+	boneMapping.clear();
+
+	std::vector<GameObject*> bones;
+	rootBone->CollectChilds(bones);
+
+	for (uint i = 0; i < bones.size(); ++i)
+	{
+		boneMapping[bones[i]->name] = bones[i];
+	}
+}
+
+void C_Animator::Update(float dt)
+{
+	if (playing == true) {
+		if (started == false) {
+			Start();
+		}
+
+		ResourceAnimation* currentAnimation = _anim;
+
+		time += dt;
+
+		if (currentAnimation && time > currentAnimation->duration) {
+			if (currentAnimation->loopable == true) {
+				time = 0.0f;
+			}
+			else {
+				playing = false;
+				return;
+			}
+		}
+
+	}
+}
+
 void C_Animator::SetResource(ResourceAnimation* re_anim)
 {
 	_anim = re_anim;
@@ -71,8 +114,8 @@ bool C_Animator::OnEditor()
 		{
 			ImGui::Text("Previous Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", previous_animation);
 			ImGui::Text("Current Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", current_animation);
-			ImGui::Text("Previous Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", prevAnimTime);
-			ImGui::Text("Current Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", time);
+			ImGui::Text("Previous Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%f", prevAnimTime);
+			ImGui::Text("Current Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%f", time);
 			ImGui::Text("blendTime: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", blendTime);
 
 			ImGui::Spacing();
@@ -148,47 +191,5 @@ void C_Animator::SetAnimation(ResourceAnimation* anim)
 	_anim = anim;
 }
 
-void C_Animator::Start()
-{
-	//TODO: hard-coding root bone for fast code iteration
-	rootBone = gameObject->children[1];
-	//gameObject->children[0]->GetComponent<C_Mesh>()->rootBone = rootBone;
-
-	if (rootBone == nullptr) return;
-
-	boneMapping.clear();
-
-	std::vector<GameObject*> bones;
-	rootBone->CollectChilds(bones);
-
-	for (uint i = 0; i < bones.size(); ++i)
-	{
-		boneMapping[bones[i]->name] = bones[i];
-	}
-}
-
-void C_Animator::Update(float dt)
-{
-	if (playing == true) {
-		if (started == false) {
-			Start();
-		}
-
-		ResourceAnimation* currentAnimation = _anim;
-
-		time += dt;
-
-		if (currentAnimation && time > currentAnimation->duration) {
-			if (currentAnimation->loopable == true) {
-				time = 0.0f;
-			}
-			else {
-				playing = false;
-				return;
-			}
-		}
-	
-	}
-}
 
 
