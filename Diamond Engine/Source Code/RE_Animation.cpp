@@ -90,3 +90,43 @@ void ResourceAnimation::LoadCustomFormat(const char* path)
 		channels[Channelat.boneName.c_str()] = Channelat;
 	}
 }
+
+std::map<double, float3>::const_iterator Channel::GetPrevPosKey(double currentKey) const
+{
+	std::map<double, float3>::const_iterator ret = positionKeys.lower_bound(currentKey);
+	if (ret != positionKeys.begin())
+		ret--;
+
+	return ret;
+}
+
+std::map<double, float3>::const_iterator Channel::GetNextPosKey(double currentKey) const
+{
+	return positionKeys.upper_bound(currentKey);
+}
+
+std::map<double, Quat>::const_iterator Channel::GetPrevRotKey(double currentKey) const
+{
+	std::map<double, Quat>::const_iterator ret = rotationKeys.lower_bound(currentKey);
+	if (ret != rotationKeys.begin())
+		ret--;
+	return ret;
+}
+
+std::map<double, Quat>::const_iterator Channel::GetNextRotKey(double currentKey) const
+{
+	return rotationKeys.upper_bound(currentKey);
+}
+
+std::map<double, float3>::const_iterator Channel::GetPrevScaleKey(double currentKey) const
+{
+	std::map<double, float3>::const_iterator ret = scaleKeys.lower_bound(currentKey);
+	if (ret != scaleKeys.begin())
+		ret--;
+	return ret;
+}
+
+std::map<double, float3>::const_iterator Channel::GetNextScaleKey(double currentKey) const
+{
+	return scaleKeys.upper_bound(currentKey);
+}
