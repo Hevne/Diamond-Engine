@@ -212,29 +212,26 @@ void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, cons
 
 		const Channel& channel = settings->channels.find(boneIt->first.c_str())->second;
 	
-		//float3 position = GetChannelPosition(channel, currentFrame, transform->position);
-		//float3 position = transform->position;
-		//std::map<double, float3>::const_iterator previous = channel.positionKeys.lower_bound(currentFrame);
-		//position = previous->second;
-		//Quat rotation = GetChannelRotation(channel, currentFrame, transform->rotation);
+		float3 position = GetChannelPosition(channel, currentFrame, transform->position);
 		Quat rotation = GetChannelRotation(channel, currentFrame, transform->rotation);
+		float3 scale = GetChannelScale(channel, currentFrame, transform->localScale);
 
-		//float3 scale = GetChannelScale(channel, currentFrame, transform->localScale);
 
-		//if (blend != nullptr)
-		//{
-		//	const Channel& blendChannel = blend->channels.find(boneIt->first.c_str())->second;
+		//BLEND
+		if (blend != nullptr)
+		{
+			const Channel& blendChannel = blend->channels.find(boneIt->first.c_str())->second;
 
-		//	position = float3::Lerp(GetChannelPosition(blendChannel, prevBlendFrame, transform->GetPosition()), position, blendRatio);
-		//	rotation = Quat::Slerp(GetChannelRotation(blendChannel, prevBlendFrame, transform->GetQuatRotation()), rotation, blendRatio);
-		//	scale = float3::Lerp(GetChannelScale(blendChannel, prevBlendFrame, transform->GetScale()), scale, blendRatio);
-		//}
+			position = float3::Lerp(GetChannelPosition(blendChannel, prevBlendFrame, transform->position), position, blendRatio);
+			rotation = Quat::Slerp(GetChannelRotation(blendChannel, prevBlendFrame, transform->rotation), rotation, blendRatio);
+			scale = float3::Lerp(GetChannelScale(blendChannel, prevBlendFrame, transform->localScale), scale, blendRatio);
+		}
 
 		
-		//transform->position = position;
+		transform->position = position;
 		transform->eulerRotation = rotation.ToEulerXYZ() * RADTODEG;
+		transform->localScale = scale;
 		transform->updateTransform = true;
-		//transform->localScale = scale;
 	}
 }
 
@@ -258,85 +255,61 @@ Quat C_Animator::GetChannelRotation(const Channel& channel, float currentKey, Qu
 		else //blend between both keys
 		{
 			//0 to 1
-			//float ratio = (currentKey - previous->first) / (next->first - previous->first);
-			rotation = previous->second;//.Slerp(next->second, ratio);
+			float ratio = (currentKey - previous->first) / (next->first - previous->first);
+			rotation = previous->second.Slerp(next->second, ratio);
 		}
 	}
 	return rotation;
 }
-//float3 C_Animator::GetChannelPosition(const Channel& channel, float currentKey, float3 default)
-//{
-//	float3 position = default;
-//
-//	if (channel.positionKeys.size() > 0)
-//	{
-//		std::map<double, float3>::const_iterator previous = channel.GetPrevPosKey(currentKey);
-//		std::map<double, float3>::const_iterator next = channel.GetNextPosKey(currentKey);
-//
-//		if (next == channel.positionKeys.end())
-//			next = previous;
-//
-//		//If both keys are the same, no need to blend
-//		if (previous == next)
-//			position = previous->second;
-//		else //blend between both keys
-//		{
-//			//0 to 1
-//			float ratio = (currentKey - previous->first) / (next->first - previous->first);
-//			position = previous->second.Lerp(next->second, ratio);
-//		}
-//	}
-//
-//	return position;
-//}
+float3 C_Animator::GetChannelPosition(const Channel& channel, float currentKey, float3 default) const
+{
+	float3 position = default;
 
-//Quat C_Animator::GetChannelRotation(const Channel & channel, float currentKey, Quat default)
-//{
-//	Quat rotation = default;
-//
-//	if (channel.rotationKeys.size() > 0)
-//	{
-//		std::map<double, Quat>::const_iterator previous = channel.GetPrevRotKey(currentKey);
-//		std::map<double, Quat>::const_iterator next = channel.GetNextRotKey(currentKey);
-//
-//		if (next == channel.rotationKeys.end())
-//			next = previous;
-//
-//		//If both keys are the same, no need to blend
-//		if (previous == next)
-//			rotation = previous->second;
-//		else //blend between both keys
-//		{
-//			//0 to 1
-//			float ratio = (currentKey - previous->first) / (next->first - previous->first);
-//			rotation = previous->second.Slerp(next->second, ratio);
-//		}
-//	}
-//	return rotation;
-//}
+	if (channel.positionKeys.size() > 0)
+	{
+		std::map<double, float3>::const_iterator previous = channel.GetPrevPosKey(currentKey);
+		std::map<double, float3>::const_iterator next = channel.GetNextPosKey(currentKey);
 
-//float3 C_Animator::GetChannelScale(const Channel & channel, float currentKey, float3 default)
-//{
-//	float3 scale = default;
-//
-//	if (channel.scaleKeys.size() > 0)
-//	{
-//		std::map<double, float3>::const_iterator previous = channel.GetPrevScaleKey(currentKey);
-//		std::map<double, float3>::const_iterator next = channel.GetPrevScaleKey(currentKey);
-//
-//		if (next == channel.scaleKeys.end())
-//			next = previous;
-//
-//		//If both keys are the same, no need to blend
-//		if (previous == next)
-//			scale = previous->second;
-//		else //blend between both keys
-//		{
-//			//0 to 1
-//			float ratio = (currentKey - previous->first) / (next->first - previous->first);
-//			scale = previous->second.Lerp(next->second, ratio);
-//		}
-//	}
-//	return scale;
-//}
-//
+		if (next == channel.positionKeys.end())
+			next = previous;
+
+		//If both keys are the same, no need to blend
+		if (previous == next)
+			position = previous->second;
+		else //blend between both keys
+		{
+			//0 to 1
+			float ratio = (currentKey - previous->first) / (next->first - previous->first);
+			position = previous->second.Lerp(next->second, ratio);
+		}
+	}
+
+	return position;
+}
+
+
+float3 C_Animator::GetChannelScale(const Channel & channel, float currentKey, float3 default) const
+{
+	float3 scale = default;
+
+	if (channel.scaleKeys.size() > 0)
+	{
+		std::map<double, float3>::const_iterator previous = channel.GetPrevScaleKey(currentKey);
+		std::map<double, float3>::const_iterator next = channel.GetPrevScaleKey(currentKey);
+
+		if (next == channel.scaleKeys.end())
+			next = previous;
+
+		//If both keys are the same, no need to blend
+		if (previous == next)
+			scale = previous->second;
+		else //blend between both keys
+		{
+			//0 to 1
+			float ratio = (currentKey - previous->first) / (next->first - previous->first);
+			scale = previous->second.Lerp(next->second, ratio);
+		}
+	}
+	return scale;
+}
+

@@ -41,9 +41,9 @@ public:
 
 	void UpdateChannelsTransform(const ResourceAnimation* settings, const ResourceAnimation* blend, float blendRatio);
 
-	//float3 GetChannelPosition(const Channel& channel, float currentKey, float3 default);
+	float3 GetChannelPosition(const Channel& channel, float currentKey, float3 default) const;
 	Quat GetChannelRotation(const Channel& channel, float currentKey, Quat default) const;
-	//float3 GetChannelScale(const Channel& channel, float currentKey, float3 default);
+	float3 GetChannelScale(const Channel& channel, float currentKey, float3 default) const;
 
 	//void SetAnimation(const char* name, float blendTime = 0.0f);
 	//void SetAnimation(uint index, float blendTime = 0.0f);
