@@ -160,9 +160,9 @@ ResourceAnimation* AnimationLoader::LoadAnimation(aiAnimation* importedAnimation
 	file_name += ".anim";
 
 	RELEASE_ARRAY(buffer);
-	FileSystem::Load(ANIMATIONS_PATH, file_name.c_str(), &buffer);
-	 
-	ResourceAnimation* loaded_animation =LoadCustomFormat(buffer);
+	//FileSystem::Load(ANIMATIONS_PATH, file_name.c_str(), &buffer);
+	// 
+	//ResourceAnimation* loaded_animation =LoadCustomFormat(buffer);
 
 	return anim;
 }
