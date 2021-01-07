@@ -41,7 +41,7 @@ C_Transform::~C_Transform()
 {
 }
 
-void C_Transform::Update()
+void C_Transform::Update(float dt)
 {
 	if (updateTransform)
 		UpdateTransform();

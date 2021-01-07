@@ -68,7 +68,7 @@ update_status M_Scene::Update(float dt)
 	if (App->moduleInput->GetKey(SDL_SCANCODE_DELETE) == KEY_DOWN && App->moduleEditor->GetSelectedGO() != nullptr && App->moduleEditor->GetSelectedAsset() == nullptr)
 		App->moduleEditor->GetSelectedGO()->Destroy();
 
-	UpdateGameObjects();
+	UpdateGameObjects(dt);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -114,12 +114,12 @@ void M_Scene::Destroy(GameObject* gm)
 	gm = nullptr;
 }
 
-void M_Scene::UpdateGameObjects()
+void M_Scene::UpdateGameObjects(float dt)
 {
-	RecursiveUpdate(root);
+	RecursiveUpdate(root,dt);
 }
 
-void M_Scene::RecursiveUpdate(GameObject* parent)
+void M_Scene::RecursiveUpdate(GameObject* parent, float dt)
 {
 	if (parent->toDelete)
 	{
@@ -129,11 +129,11 @@ void M_Scene::RecursiveUpdate(GameObject* parent)
 
 	if (parent->isActive()) 
 	{
-		parent->Update();
+		parent->Update(dt);
 
 		for (size_t i = 0; i < parent->children.size(); i++)
 		{
-			RecursiveUpdate(parent->children[i]);
+			RecursiveUpdate(parent->children[i],dt);
 		}
 	}
 }

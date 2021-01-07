@@ -32,8 +32,8 @@ public:
 	void SetAnimation(ResourceAnimation* anim);
 	//void DrawLinkedBones() const;
 
-	//void Start();
-	void Update() override;
+	void Start();
+	void Update(float dt) override;
 
 	//void SetAnimation(const char* name, float blendTime = 0.0f);
 	//void SetAnimation(uint index, float blendTime = 0.0f);

@@ -15,7 +15,7 @@ public:
 	GameObject(const char*, GameObject* parent, int _uid = -1);
 	virtual ~GameObject();
 
-	void Update();
+	void Update(float dt);
 
 	Component* AddComponent(Component::Type _type);
 	Component* GetComponent(Component::Type _type);
@@ -38,6 +38,7 @@ public:
 	bool IsChild(GameObject*);
 
 	void RemoveChild(GameObject*);
+	void CollectChilds(std::vector<GameObject*>& vector);
 
 	GameObject* parent;
 	C_Transform* transform;

@@ -48,7 +48,7 @@ GameObject::~GameObject()
 	children.clear();
 }
 
-void GameObject::Update()
+void GameObject::Update(float dt)
 {
 	if (dumpComponent != nullptr) 
 	{
@@ -60,7 +60,7 @@ void GameObject::Update()
 	for (size_t i = 0; i < components.size(); i++)
 	{
 		if(components[i]->IsActive())
-			components[i]->Update();
+			components[i]->Update(dt);
 	}
 }
 
@@ -258,4 +258,11 @@ bool GameObject::IsChild(GameObject* _toFind)
 void GameObject::RemoveChild(GameObject* child)
 {
 	children.erase(std::find(children.begin(), children.end(), child));
+}
+
+void GameObject::CollectChilds(std::vector<GameObject*>& vector)
+{
+	vector.push_back(this);
+	for (uint i = 0; i < children.size(); i++)
+		children[i]->CollectChilds(vector);
 }

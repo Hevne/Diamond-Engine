@@ -13,7 +13,7 @@ public:
 	/*void Update() override;*/
 	bool OnEditor() override;
 
-	void Update() override;
+	void Update(float dt) override;
 
 	void SaveData(JSON_Object* nObj) override;
 	void LoadData(JSON_Object* nObj) override;

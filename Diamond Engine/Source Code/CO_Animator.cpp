@@ -103,8 +103,10 @@ bool C_Animator::OnEditor()
 
 			ImGui::Spacing();
 
-			if (ImGui::Button("Link channels to bones"))
-				LinkChannelBones(gameObject);
+			if (ImGui::Button("Link channels to bones")) {
+				//LinkChannelBones(gameObject);
+				playing = true;
+			}
 		
 
 			ImGui::Spacing();
@@ -146,9 +148,47 @@ void C_Animator::SetAnimation(ResourceAnimation* anim)
 	_anim = anim;
 }
 
-void C_Animator::Update()
+void C_Animator::Start()
 {
-	int i = 0;
+	//TODO: hard-coding root bone for fast code iteration
+	rootBone = gameObject->children[1];
+	//gameObject->children[0]->GetComponent<C_Mesh>()->rootBone = rootBone;
+
+	if (rootBone == nullptr) return;
+
+	boneMapping.clear();
+
+	std::vector<GameObject*> bones;
+	rootBone->CollectChilds(bones);
+
+	for (uint i = 0; i < bones.size(); ++i)
+	{
+		boneMapping[bones[i]->name] = bones[i];
+	}
+}
+
+void C_Animator::Update(float dt)
+{
+	if (playing == true) {
+		if (started == false) {
+			Start();
+		}
+
+		ResourceAnimation* currentAnimation = _anim;
+
+		time += dt;
+
+		if (currentAnimation && time > currentAnimation->duration) {
+			if (currentAnimation->loopable == true) {
+				time = 0.0f;
+			}
+			else {
+				playing = false;
+				return;
+			}
+		}
+	
+	}
 }
 
 

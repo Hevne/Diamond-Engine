@@ -96,7 +96,7 @@ bool C_Camera::OnEditor()
 	return false;
 }
 
-void C_Camera::Update()
+void C_Camera::Update(float dt)
 {
 
 	//Maybe dont update every frame?

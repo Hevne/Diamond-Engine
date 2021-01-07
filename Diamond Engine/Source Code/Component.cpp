@@ -19,7 +19,7 @@ void Component::Disable()
 {
 }
 
-void Component::Update()
+void Component::Update(float dt)
 {
 }
 

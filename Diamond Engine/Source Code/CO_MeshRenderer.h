@@ -12,7 +12,7 @@ public:
 	C_MeshRenderer(GameObject* _gm);
 	virtual ~C_MeshRenderer();
 
-	void Update() override;
+	void Update(float dt) override;
 
 	void RenderMesh();
 

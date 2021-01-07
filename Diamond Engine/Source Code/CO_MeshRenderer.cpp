@@ -33,7 +33,7 @@ C_MeshRenderer::~C_MeshRenderer()
 	}
 }
 
-void C_MeshRenderer::Update()
+void C_MeshRenderer::Update(float dt)
 {
 
 	if (EngineExternal->moduleRenderer3D->GetGameRenderTarget() != nullptr && !IsInsideFrustum(&EngineExternal->moduleRenderer3D->GetGameRenderTarget()->camFrustrum))
