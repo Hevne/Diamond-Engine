@@ -57,7 +57,7 @@ public:
 	//static inline Type GetType() { return Type::Animator; };
 
 private:
-
+	void DrawBones(GameObject*);
 
 public:
 	GameObject* rootBone = nullptr;

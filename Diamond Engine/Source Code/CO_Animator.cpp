@@ -37,7 +37,7 @@ C_Animator::~C_Animator()
 void C_Animator::Start()
 {
 	//hard coded first bone
-	rootBone = gameObject->children[1];
+	rootBone = gameObject->children[1]->children[0];
 	//gameObject->children[0]->GetComponent<C_Mesh>()->rootBone = rootBone;
 
 	if (rootBone == nullptr) return;
@@ -75,7 +75,9 @@ void C_Animator::Update(float dt)
 		}
 
 		UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
-
+		std::vector<GameObject*> bones;
+		rootBone->CollectChilds(bones);
+		DrawBones(bones[0]);
 	}
 }
 
@@ -248,7 +250,7 @@ Quat C_Animator::GetChannelRotation(const Channel& channel, float currentKey, Qu
 			next = previous;
 
 		Quat quatLog = previous->second;
-		LOG(LogType::L_NORMAL, "Frame: %2.f Quat(%f,%f,%f,%f)", previous->first,quatLog.x,quatLog.y,quatLog.z,quatLog.w);
+		//LOG(LogType::L_NORMAL, "Frame: %2.f Quat(%f,%f,%f,%f)", previous->first,quatLog.x,quatLog.y,quatLog.z,quatLog.w);
 		//If both keys are the same, no need to blend
 		if (previous == next)
 			rotation = previous->second;
@@ -311,5 +313,31 @@ float3 C_Animator::GetChannelScale(const Channel & channel, float currentKey, fl
 		}
 	}
 	return scale;
+}
+
+void C_Animator::DrawBones(GameObject* gameObject)
+{
+	glColor3f(1.f, 0.f, 0.f);
+	glLineWidth(4.f);
+	glBegin(GL_LINES);
+
+	//Draw lines
+	std::map<std::string, GameObject*>::iterator bones;
+	float3 position;
+	Quat rotation;
+	float3 scale;
+
+	gameObject->transform->globalTransform.Decompose(position, rotation, scale);
+	glVertex3f(position.x, position.y, position.z);
+	//LOG(LogType::L_NORMAL, "Name: %s  %f,%f,%f",bones->first.c_str(), position.x, position.y, position.z);
+	if (gameObject->children.size() > 0) {
+		for (uint i = 0; i < gameObject->children.size(); i++)
+		{
+			DrawBones(gameObject->children[i]);
+		}
+	}
+	glEnd();
+	glLineWidth(1.f);
+	glColor3f(1.f, 1.f, 1.f);
 }
 
