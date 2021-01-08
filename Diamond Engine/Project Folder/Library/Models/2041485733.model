@@ -1,0 +1,37 @@
+{
+    "Model Objects": [
+        {
+            "name": "Plane",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1068296394,
+            "ParentUID": 987374784,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1473465387.mmh",
+                    "UID": 1473465387
+                }
+            ]
+        }
+    ]
+}

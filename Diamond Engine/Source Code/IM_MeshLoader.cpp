@@ -124,6 +124,23 @@ void MeshLoader::NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTextur
 			NodeToGameObject(meshArray, sceneTextures, _sceneMeshes, node->mChildren[i], rootGO, node->mChildren[i]->mName.C_Str());
 		}
 	}
+	else
+	{
+		//To avoid duplication
+		bool duplicate = false;
+		for (int i = 0; i < gmParent->children.size(); i++)
+		{
+			if (gmParent->children[i]->name == nodeName.c_str())
+			{
+				duplicate = true;
+			}
+		}
+		if (!duplicate)
+		{
+			GameObject* rootGO = new GameObject(nodeName.c_str(), gmParent);
+			PopulateTransform(rootGO, pos, rot, scale);
+		}
+	}
 }
 
 

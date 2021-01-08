@@ -2,6 +2,7 @@
 #include "OpenGL.h"
 #include "MeshArrays.h"
 #include "IM_FileSystem.h"
+
 #include"Globals.h"
 
 ResourceMesh::ResourceMesh(unsigned int _uid) : Resource(_uid, Resource::Type::MESH), indices_id(0), vertices_id(0), generalWireframe(nullptr)
@@ -501,7 +502,7 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 	memcpy(texCoords, cursor, bytes);
 	cursor += bytes;
 	
-	//LoadBones(&cursor);
+	LoadBones(&cursor);
 
 	//TODO: Should this be here?
 	localAABB.SetNegativeInfinity();
@@ -529,10 +530,34 @@ void ResourceMesh::LoadBones(char** cursor)
 		*cursor += bytes;
 	}
 
-	//char name[30];
-	//for (uint i = 0; i < bonesTransforms.size(); ++i)
-	//{
-	//	bytes = sizeof(uint);
-	//	uint nameSize = 0;
-	//}
+	//Fills the mesh boneOffset matrix by copying on an empty of 4x4 size and setting later
+	float offsets_matrix[16];
+	for (uint i = 0; i < bonesOffsets.size(); ++i)
+	{
+		bytes = sizeof(float) * 16;
+		memcpy(offsets_matrix, *cursor, bytes);
+		*cursor += bytes;
+
+		float4x4 offset;
+		offset.Set(offsets_matrix);
+		bonesOffsets[i] = offset;
+	}
+
+	//Fills the mesh boneMap by getting the string size and using it to read the name stored and setting it on the map
+	char name[30];
+	for (uint i = 0; i < bonesTransforms.size(); ++i)
+	{
+		bytes = sizeof(uint);
+		uint nameSize = 0;
+		memcpy(&nameSize, *cursor, bytes);
+		*cursor += bytes;
+
+		bytes = sizeof(char) * nameSize;
+		memcpy(name, *cursor, bytes);
+		*cursor += bytes;
+
+		name[nameSize] = '\0';
+		std::string str(name);
+		bonesMap[str.c_str()] = i;
+	}
 }

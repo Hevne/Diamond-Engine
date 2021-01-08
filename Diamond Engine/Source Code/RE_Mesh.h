@@ -6,6 +6,7 @@
 #include<string>
 
 #include"MathGeoLib\include\MathGeoLib.h"
+#include"MathGeoLib/include/Math/float4x4.h"
 #include"DEResource.h"
 
 typedef unsigned int GLuint;

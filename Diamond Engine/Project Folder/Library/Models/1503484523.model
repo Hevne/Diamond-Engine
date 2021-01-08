@@ -1,0 +1,124 @@
+{
+    "Model Objects": [
+        {
+            "name": "RootNode",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1280850988,
+            "ParentUID": 722601410,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true,
+                    "Path": "Library\/Animations\/826850652.anim",
+                    "UID": 826850652
+                }
+            ]
+        },
+        {
+            "name": "pCube1",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 2015677520,
+            "ParentUID": 1280850988,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/434283465.mmh",
+                    "UID": 434283465
+                }
+            ]
+        },
+        {
+            "name": "joint1",
+            "Position": [
+                3.2287700176239014,
+                0,
+                0.029650591313838959
+            ],
+            "Rotation": [
+                0,
+                0.99999511241912842,
+                0,
+                -0.0031181960366666317
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1870739411,
+            "ParentUID": 1280850988,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "joint2",
+            "Position": [
+                3.3610281944274902,
+                0,
+                -3.2678720840451092e-14
+            ],
+            "Rotation": [
+                0,
+                0.38611462712287903,
+                0,
+                0.92245084047317505
+            ],
+            "Scale": [
+                0.99999988079071045,
+                1,
+                0.99999988079071045
+            ],
+            "UID": 12826328,
+            "ParentUID": 1870739411,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,178 @@
+{
+    "Model Objects": [
+        {
+            "name": "RootNode",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1782341264,
+            "ParentUID": 710825692,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true,
+                    "Path": "Library\/Animations\/748590440.anim",
+                    "UID": 748590440
+                }
+            ]
+        },
+        {
+            "name": "pCube1",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 333566343,
+            "ParentUID": 1782341264,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/832125579.mmh",
+                    "UID": 832125579
+                }
+            ]
+        },
+        {
+            "name": "pCube1",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 334207345,
+            "ParentUID": 1782341264,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "joint1",
+            "Position": [
+                3.2287700176239014,
+                0,
+                0.029650591313838959
+            ],
+            "Rotation": [
+                0,
+                0.99999511241912842,
+                0,
+                -0.0031181960366666317
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 2011734647,
+            "ParentUID": 1782341264,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "joint2",
+            "Position": [
+                3.3610281944274902,
+                0,
+                -3.2678720840451092e-14
+            ],
+            "Rotation": [
+                0,
+                0.38611462712287903,
+                0,
+                0.92245084047317505
+            ],
+            "Scale": [
+                0.99999988079071045,
+                1,
+                0.99999988079071045
+            ],
+            "UID": 94401447,
+            "ParentUID": 2011734647,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "joint3",
+            "Position": [
+                1.7323487997055054,
+                0,
+                -9.9954766685783625e-15
+            ],
+            "Rotation": [
+                0,
+                0.99997663497924805,
+                0,
+                0.0068350071087479591
+            ],
+            "Scale": [
+                0.99999994039535522,
+                1,
+                0.99999994039535522
+            ],
+            "UID": 1023181767,
+            "ParentUID": 94401447,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        }
+    ]
+}
