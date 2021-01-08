@@ -22,6 +22,7 @@ namespace MeshLoader
 
 	void NodeToGameObject(aiMesh** meshArray, std::vector<ResourceTexture*>& sceneTextures, std::vector<ResourceMesh*>& _sceneMeshes, aiNode* node, GameObject* gmParent, const char* holderName);
 	ResourceMesh* LoadMesh(aiMesh* importedMesh, uint oldUID = 0);
+	void LoadBones(const aiMesh* importedMesh, ResourceMesh* ourMesh);
 
 	void PopulateTransform(GameObject* child, float3 position, Quat rotationQuat, float3 size);
 }

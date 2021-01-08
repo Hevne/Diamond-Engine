@@ -2,6 +2,7 @@
 
 #include "glmath.h" //Move to MathGeoLib
 #include <vector>
+#include <map>
 #include<string>
 
 #include"MathGeoLib\include\MathGeoLib.h"
@@ -45,6 +46,18 @@ public:
 	uint texCoords_count = 0;
 	float* texCoords = nullptr;
 
+	//Bones stuff [Remember 4 max for vertices]
+
+	uint bones_count = 0;
+	int* bones = nullptr;
+
+	uint weights_count = 0;
+	float* boneWeights = nullptr;
+
+	std::map<std::string, uint> bonesMap;
+	std::vector<float4x4> bonesTransforms;
+	std::vector<float4x4> bonesOffsets;
+
 	AABB localAABB;
 
 	//TODO: Delete this, wireframe mode should be different
@@ -56,5 +69,7 @@ public:
 
 	//TODO: Move this to file system
 	const char* SaveCustomFormat(uint& retSize);
+	void SaveBones(char** cursor);
 	void LoadCustomFormat(const char*);
+
 };

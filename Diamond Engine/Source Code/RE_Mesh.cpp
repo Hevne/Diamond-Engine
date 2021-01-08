@@ -336,8 +336,18 @@ void ResourceMesh::GenerateSphere(float radius, float sectorCount, float stackCo
 
 const char* ResourceMesh::SaveCustomFormat(uint& retSize)
 {
-	uint aCounts[4] = { indices_count, vertices_count, normals_count, texCoords_count };
-	retSize = sizeof(aCounts) + (sizeof(uint) * indices_count) + (sizeof(float) * vertices_count * 3) + (sizeof(float) * normals_count * 3) + (sizeof(float) * texCoords_count * 2);
+	uint aCounts[6] = { indices_count, vertices_count, normals_count, texCoords_count, bones_count, weights_count };
+	retSize = sizeof(aCounts) + (sizeof(uint) * indices_count) + (sizeof(float) * vertices_count * 3) + (sizeof(float) * normals_count * 3) + (sizeof(float) * texCoords_count * 2)
+		+ (sizeof(int) * bones_count) + (sizeof(float) * weights_count) + (sizeof(float) * 16 * bonesOffsets.size()) + (sizeof(char) * 30 * bonesMap.size());
+
+	//Stores each bone size
+	std::map<std::string, uint>::const_iterator it;
+	for (it = bonesMap.begin(); it != bonesMap.end(); ++it)
+	{
+		retSize += sizeof(uint);
+		retSize += sizeof(char) * it->first.size();
+	}
+
 
 	char* fileBuffer = new char[retSize];
 	char* cursor = fileBuffer;
@@ -362,7 +372,55 @@ const char* ResourceMesh::SaveCustomFormat(uint& retSize)
 	memcpy(cursor, texCoords, bytes);
 	cursor += bytes;
 
+	SaveBones(&cursor);
+
 	return fileBuffer;
+}
+
+void ResourceMesh::SaveBones(char** cursor)
+{
+	uint bytes = 0;
+	
+	if (bones_count > 0)
+	{
+		bytes = sizeof(int) * bones_count;
+		memcpy(*cursor, bones, bytes);
+		*cursor += bytes;
+	}
+	if (weights_count > 0)
+	{
+		bytes = sizeof(float) * weights_count;
+		memcpy(*cursor, boneWeights, bytes);
+		*cursor += bytes;
+	}
+	if (bonesOffsets.size() > 0)
+	{
+		for (int i = 0; i < bonesOffsets.size(); ++i)
+		{
+			bytes = sizeof(float) * 16;
+			memcpy(*cursor, bonesOffsets[i].ptr(), bytes);
+			*cursor += bytes;
+		}
+	}
+
+	for (int i = 0; i < bonesMap.size(); ++i)
+	{
+		std::map<std::string, uint>::const_iterator it;
+		for (it = bonesMap.begin(); it != bonesMap.end(); ++it)
+		{
+			if (it->second == i)
+			{
+				bytes = sizeof(uint);
+				uint stringSize = it->first.size();
+				memcpy(*cursor, &stringSize, bytes);
+				*cursor += bytes;
+
+				bytes = sizeof(char) * stringSize;
+				memcpy(*cursor, it->first.c_str(), bytes);
+				*cursor += bytes;
+			}
+		}
+	}
 }
 
 void ResourceMesh::LoadCustomFormat(const char* path)

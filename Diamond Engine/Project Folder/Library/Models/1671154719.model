@@ -18,8 +18,8 @@
                 1,
                 1
             ],
-            "UID": 2048068524,
-            "ParentUID": 205829548,
+            "UID": 1432774689,
+            "ParentUID": 1728408547,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 6,
                     "Active": true,
-                    "Path": "Library\/Animations\/1293426456.anim",
-                    "UID": 1293426456
+                    "Path": "Library\/Animations\/1867463601.anim",
+                    "UID": 1867463601
                 }
             ]
         },
@@ -51,8 +51,8 @@
                 1,
                 1
             ],
-            "UID": 2106999545,
-            "ParentUID": 2048068524,
+            "UID": 591219719,
+            "ParentUID": 1432774689,
             "Components": [
                 {
                     "Type": 1,
@@ -61,8 +61,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/2001943050.mmh",
-                    "UID": 2001943050
+                    "Path": "Library\/Meshes\/657310244.mmh",
+                    "UID": 657310244
                 }
             ]
         },
@@ -84,8 +84,8 @@
                 1,
                 1
             ],
-            "UID": 1102363169,
-            "ParentUID": 2048068524,
+            "UID": 488994450,
+            "ParentUID": 1432774689,
             "Components": [
                 {
                     "Type": 1,
@@ -111,8 +111,8 @@
                 1,
                 0.99999988079071045
             ],
-            "UID": 855612463,
-            "ParentUID": 1102363169,
+            "UID": 224347559,
+            "ParentUID": 488994450,
             "Components": [
                 {
                     "Type": 1,
