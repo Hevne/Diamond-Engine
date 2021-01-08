@@ -246,6 +246,8 @@ Quat C_Animator::GetChannelRotation(const Channel& channel, float currentKey, Qu
 		std::map<double, Quat>::const_iterator previous = channel.GetPrevRotKey(currentKey);
 		std::map<double, Quat>::const_iterator next = channel.GetNextRotKey(currentKey);
 
+		if (previous->first == -1) return rotation;
+
 		if (next == channel.rotationKeys.end())
 			next = previous;
 
@@ -271,6 +273,8 @@ float3 C_Animator::GetChannelPosition(const Channel& channel, float currentKey, 
 	{
 		std::map<double, float3>::const_iterator previous = channel.GetPrevPosKey(currentKey);
 		std::map<double, float3>::const_iterator next = channel.GetNextPosKey(currentKey);
+
+		if (previous->first == -1) return position;
 
 		if (next == channel.positionKeys.end())
 			next = previous;
@@ -298,6 +302,8 @@ float3 C_Animator::GetChannelScale(const Channel & channel, float currentKey, fl
 	{
 		std::map<double, float3>::const_iterator previous = channel.GetPrevScaleKey(currentKey);
 		std::map<double, float3>::const_iterator next = channel.GetPrevScaleKey(currentKey);
+
+		if (previous->first == -1) return scale;
 
 		if (next == channel.scaleKeys.end())
 			next = previous;
