@@ -1,9 +1,10 @@
 {
     "Assets Path": "Assets\/Primitives\/Monkey.fbx",
-    "Library Path": "Library\/Models\/857728432.model",
-    "UID": 857728432,
+    "Library Path": "Library\/Models\/1277397823.model",
+    "UID": 1277397823,
     "Type": 1,
     "Meshes Inside": [
-        1361253439
-    ]
+        72091990
+    ],
+    "Animations Inside": []
 }

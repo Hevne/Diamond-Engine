@@ -1,7 +1,7 @@
 {
     "Model Objects": [
         {
-            "name": "simpleAnimation",
+            "name": "RootNode",
             "Position": [
                 0,
                 0,
@@ -18,12 +18,18 @@
                 1,
                 1
             ],
-            "UID": 748298465,
-            "ParentUID": 1215872491,
+            "UID": 419719862,
+            "ParentUID": 571724467,
             "Components": [
                 {
                     "Type": 1,
                     "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true,
+                    "Path": "Library\/Animations\/427586361.anim",
+                    "UID": 427586361
                 }
             ]
         },
@@ -45,8 +51,8 @@
                 1,
                 1
             ],
-            "UID": 1481639192,
-            "ParentUID": 748298465,
+            "UID": 506527573,
+            "ParentUID": 419719862,
             "Components": [
                 {
                     "Type": 1,
@@ -55,13 +61,13 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/2071989788.mmh",
-                    "UID": 2071989788
+                    "Path": "Library\/Meshes\/353401240.mmh",
+                    "UID": 353401240
                 }
             ]
         },
         {
-            "name": "joint1_$AssimpFbx$_Translation",
+            "name": "joint1",
             "Position": [
                 3.2287700176239014,
                 0,
@@ -78,8 +84,8 @@
                 1,
                 1
             ],
-            "UID": 972686234,
-            "ParentUID": 748298465,
+            "UID": 1127192446,
+            "ParentUID": 419719862,
             "Components": [
                 {
                     "Type": 1,
@@ -88,7 +94,7 @@
             ]
         },
         {
-            "name": "joint2_$AssimpFbx$_Translation",
+            "name": "joint2",
             "Position": [
                 3.3610281944274902,
                 0,
@@ -105,8 +111,8 @@
                 1,
                 0.99999988079071045
             ],
-            "UID": 638972816,
-            "ParentUID": 972686234,
+            "UID": 770370645,
+            "ParentUID": 1127192446,
             "Components": [
                 {
                     "Type": 1,

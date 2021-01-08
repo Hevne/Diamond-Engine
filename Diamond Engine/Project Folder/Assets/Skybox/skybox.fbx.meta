@@ -1,9 +1,10 @@
 {
-    "Assets Path": "Assets\/skybox.fbx",
-    "Library Path": "Library\/Models\/2088005083.model",
-    "UID": 2088005083,
+    "Assets Path": "Assets\/Skybox\/skybox.fbx",
+    "Library Path": "Library\/Models\/2105851280.model",
+    "UID": 2105851280,
     "Type": 1,
     "Meshes Inside": [
-        1506955713
-    ]
+        1927560704
+    ],
+    "Animations Inside": []
 }

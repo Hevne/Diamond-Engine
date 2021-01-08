@@ -378,10 +378,7 @@ const char* ResourceMesh::SaveCustomFormatwithBones(uint& retSize)
 
 const char* ResourceMesh::SaveCustomFormat(uint& retSize)
 {
-	if (true)
-	{
-		uint aCounts[4] = { indices_count, vertices_count, normals_count, texCoords_count };
-	}
+	uint aCounts[4] = { indices_count, vertices_count, normals_count, texCoords_count};
 	retSize = sizeof(aCounts) + (sizeof(uint) * indices_count) + (sizeof(float) * vertices_count * 3) + (sizeof(float) * normals_count * 3) + (sizeof(float) * texCoords_count * 2);
 
 	char* fileBuffer = new char[retSize];

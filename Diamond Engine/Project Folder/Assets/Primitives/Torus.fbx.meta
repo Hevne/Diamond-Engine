@@ -1,9 +1,10 @@
 {
     "Assets Path": "Assets\/Primitives\/Torus.fbx",
-    "Library Path": "Library\/Models\/1356356844.model",
-    "UID": 1356356844,
+    "Library Path": "Library\/Models\/697082094.model",
+    "UID": 697082094,
     "Type": 1,
     "Meshes Inside": [
-        2118360703
-    ]
+        2064732406
+    ],
+    "Animations Inside": []
 }

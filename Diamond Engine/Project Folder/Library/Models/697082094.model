@@ -1,7 +1,7 @@
 {
     "Model Objects": [
         {
-            "name": "Pyramid",
+            "name": "Torus",
             "Position": [
                 0,
                 0,
@@ -18,8 +18,8 @@
                 1,
                 1
             ],
-            "UID": 434494088,
-            "ParentUID": 73603230,
+            "UID": 847225886,
+            "ParentUID": 474475240,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/1541521021.mmh",
-                    "UID": 1541521021
+                    "Path": "Library\/Meshes\/2064732406.mmh",
+                    "UID": 2064732406
                 }
             ]
         }

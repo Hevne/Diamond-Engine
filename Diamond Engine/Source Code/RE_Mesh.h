@@ -47,6 +47,7 @@ public:
 	float* texCoords = nullptr;
 
 	//Bones stuff [Remember 4 max for vertices]
+	bool hasSkeleton = false;
 
 	uint bones_count = 0;
 	int* bones = nullptr;
@@ -68,6 +69,7 @@ public:
 	void GenerateSphere(float radius, float sectorCount, float stackCount);
 
 	//TODO: Move this to file system
+	const char* SaveCustomFormatwithBones(uint& retSize);
 	const char* SaveCustomFormat(uint& retSize);
 	void SaveBones(char** cursor);
 	void LoadCustomFormat(const char*);

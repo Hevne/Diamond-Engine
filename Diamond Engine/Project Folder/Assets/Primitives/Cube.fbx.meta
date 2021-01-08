@@ -1,9 +1,10 @@
 {
     "Assets Path": "Assets\/Primitives\/Cube.fbx",
-    "Library Path": "Library\/Models\/444791186.model",
-    "UID": 444791186,
+    "Library Path": "Library\/Models\/1653043343.model",
+    "UID": 1653043343,
     "Type": 1,
     "Meshes Inside": [
-        796231171
-    ]
+        570591720
+    ],
+    "Animations Inside": []
 }

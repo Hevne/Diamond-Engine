@@ -1,25 +1,25 @@
 {
     "Model Objects": [
         {
-            "name": "Monkey",
+            "name": "Plane",
             "Position": [
                 0,
                 0,
                 0
             ],
             "Rotation": [
-                -0.7071068286895752,
                 0,
                 0,
-                0.70710670948028564
+                0,
+                1
             ],
             "Scale": [
                 1,
                 1,
                 1
             ],
-            "UID": 343718306,
-            "ParentUID": 790015870,
+            "UID": 424204777,
+            "ParentUID": 1551989542,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/1361253439.mmh",
-                    "UID": 1361253439
+                    "Path": "Library\/Meshes\/1261812751.mmh",
+                    "UID": 1261812751
                 }
             ]
         }

@@ -1,7 +1,7 @@
 {
     "Model Objects": [
         {
-            "name": "Plane",
+            "name": "Pyramid",
             "Position": [
                 0,
                 0,
@@ -18,8 +18,8 @@
                 1,
                 1
             ],
-            "UID": 1275517694,
-            "ParentUID": 601903505,
+            "UID": 916125904,
+            "ParentUID": 1339718955,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/1658323125.mmh",
-                    "UID": 1658323125
+                    "Path": "Library\/Meshes\/1365665973.mmh",
+                    "UID": 1365665973
                 }
             ]
         }

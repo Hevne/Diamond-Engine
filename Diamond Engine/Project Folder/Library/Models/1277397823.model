@@ -1,7 +1,7 @@
 {
     "Model Objects": [
         {
-            "name": "Cube",
+            "name": "Monkey",
             "Position": [
                 0,
                 0,
@@ -18,8 +18,8 @@
                 1,
                 1
             ],
-            "UID": 1420937222,
-            "ParentUID": 1171279786,
+            "UID": 1298730459,
+            "ParentUID": 447152751,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/796231171.mmh",
-                    "UID": 796231171
+                    "Path": "Library\/Meshes\/72091990.mmh",
+                    "UID": 72091990
                 }
             ]
         }

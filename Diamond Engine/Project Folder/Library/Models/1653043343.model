@@ -1,25 +1,25 @@
 {
     "Model Objects": [
         {
-            "name": "Cylinder",
+            "name": "Cube",
             "Position": [
                 0,
                 0,
                 0
             ],
             "Rotation": [
+                -0.7071068286895752,
                 0,
                 0,
-                0,
-                1
+                0.70710670948028564
             ],
             "Scale": [
                 1,
                 1,
                 1
             ],
-            "UID": 1772435789,
-            "ParentUID": 1088650160,
+            "UID": 1885844527,
+            "ParentUID": 1013635914,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/1379317828.mmh",
-                    "UID": 1379317828
+                    "Path": "Library\/Meshes\/570591720.mmh",
+                    "UID": 570591720
                 }
             ]
         }

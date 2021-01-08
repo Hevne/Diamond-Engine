@@ -1,7 +1,7 @@
 {
     "Model Objects": [
         {
-            "name": "Torus",
+            "name": "Cylinder",
             "Position": [
                 0,
                 0,
@@ -18,8 +18,8 @@
                 1,
                 1
             ],
-            "UID": 1065605909,
-            "ParentUID": 2085253050,
+            "UID": 2110179682,
+            "ParentUID": 435103877,
             "Components": [
                 {
                     "Type": 1,
@@ -28,8 +28,8 @@
                 {
                     "Type": 2,
                     "Active": true,
-                    "Path": "Library\/Meshes\/2118360703.mmh",
-                    "UID": 2118360703
+                    "Path": "Library\/Meshes\/1526603981.mmh",
+                    "UID": 1526603981
                 }
             ]
         }
