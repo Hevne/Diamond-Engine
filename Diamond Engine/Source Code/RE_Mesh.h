@@ -71,5 +71,6 @@ public:
 	const char* SaveCustomFormat(uint& retSize);
 	void SaveBones(char** cursor);
 	void LoadCustomFormat(const char*);
+	void LoadBones(char** cursor);
 
 };

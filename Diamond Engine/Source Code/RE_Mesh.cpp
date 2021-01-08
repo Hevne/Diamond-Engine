@@ -443,6 +443,26 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 	texCoords_count = variables[3];
 	cursor += bytes;
 
+	uint bones_variables[2];
+
+	bytes = sizeof(bones_variables);
+	memcpy(bones_variables, cursor, bytes);
+
+	if (bones_variables[0] > 0)
+	{
+		bones_count = bones_variables[0];
+		weights_count = bones_variables[1];
+		cursor += bytes;
+	}
+
+	//bytes = sizeof(uint);
+	//uint bonesSize = 0;
+	//memcpy(&bonesSize, cursor, bytes);
+	//cursor += bytes;
+
+	//bonesTransforms.resize(bonesSize);
+	//bonesOffsets.resize(bonesSize);
+
 
 	bytes = sizeof(uint) * indices_count;
 
@@ -464,6 +484,8 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 	bytes = sizeof(float) * texCoords_count * 2;
 	memcpy(texCoords, cursor, bytes);
 	cursor += bytes;
+	
+	LoadBones(&cursor);
 
 	//TODO: Should this be here?
 	localAABB.SetNegativeInfinity();
@@ -471,4 +493,16 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 
 	delete[] fileBuffer;
 	fileBuffer = nullptr;
+}
+
+void ResourceMesh::LoadBones(char** cursor)
+{
+	if (bones_count > 0)
+	{
+
+	}
+	if (weights_count > 0)
+	{
+
+	}
 }
