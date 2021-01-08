@@ -210,14 +210,14 @@ ResourceMesh* MeshLoader::LoadMesh(aiMesh* importedMesh, uint oldUID)
 	//TODO: Save on own file format
 	uint size = 0;
 	char* buffer;
-	if (_mesh->hasSkeleton)
-	{
+	/*if (_mesh->hasSkeleton)
+	{*/
 		buffer = (char*)_mesh->SaveCustomFormatwithBones(size);
-	}
+	/*}
 	else
 	{
 		buffer = (char*)_mesh->SaveCustomFormat(size);
-	}
+	}*/
 	FileSystem::Save(file.c_str(), buffer, size, false);
 	RELEASE_ARRAY(buffer);
 

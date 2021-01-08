@@ -1,0 +1,1393 @@
+{
+    "Model Objects": [
+        {
+            "name": "scene",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 437450473,
+            "ParentUID": 86589162,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 6,
+                    "Active": true,
+                    "Path": "Library\/Animations\/890753068.anim",
+                    "UID": 890753068
+                }
+            ]
+        },
+        {
+            "name": "Dummy001",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                -0.70710676908493042,
+                0,
+                0,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 126298979,
+            "ParentUID": 437450473,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                }
+            ]
+        },
+        {
+            "name": "City_building_004",
+            "Position": [
+                -41.47589111328125,
+                21.01409912109375,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1263166141,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/643858563.mmh",
+                    "UID": 643858563
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1311868643.dds",
+                    "UID": 1311868643
+                }
+            ]
+        },
+        {
+            "name": "City_building_001",
+            "Position": [
+                17.707164764404297,
+                20.053276062011719,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1287074264,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1650850792.mmh",
+                    "UID": 1650850792
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/115861679.dds",
+                    "UID": 115861679
+                }
+            ]
+        },
+        {
+            "name": "City_building_007",
+            "Position": [
+                16.010492324829102,
+                37.4932861328125,
+                -1.9999999949504854e-06
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1494679222,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/558202392.mmh",
+                    "UID": 558202392
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/855134841.dds",
+                    "UID": 855134841
+                }
+            ]
+        },
+        {
+            "name": "City_building_008",
+            "Position": [
+                40.979995727539063,
+                18.270824432373047,
+                -1.9999999949504854e-06
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 447032183,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1744657320.mmh",
+                    "UID": 1744657320
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/653619480.dds",
+                    "UID": 653619480
+                }
+            ]
+        },
+        {
+            "name": "Line002",
+            "Position": [
+                -2.1597719192504883,
+                1.8538379669189453,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1494600319,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/788412137.mmh",
+                    "UID": 788412137
+                }
+            ]
+        },
+        {
+            "name": "Plane001",
+            "Position": [
+                -0.028603000566363335,
+                0.026032000780105591,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                0.99663501977920532,
+                0.97061598300933838,
+                0.99663501977920532
+            ],
+            "UID": 1396177361,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/359372757.mmh",
+                    "UID": 359372757
+                }
+            ]
+        },
+        {
+            "name": "City_building_010",
+            "Position": [
+                25.154010772705078,
+                -39.153720855712891,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1711736020,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/964717753.mmh",
+                    "UID": 964717753
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/457375527.dds",
+                    "UID": 457375527
+                }
+            ]
+        },
+        {
+            "name": "City_building_010",
+            "Position": [
+                25.154010772705078,
+                -39.153720855712891,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 315941802,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2063621688.mmh",
+                    "UID": 2063621688
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/457375527.dds",
+                    "UID": 457375527
+                }
+            ]
+        },
+        {
+            "name": "City_building_011",
+            "Position": [
+                30.134540557861328,
+                37.4932861328125,
+                -1.9999999949504854e-06
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1656684468,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/558202392.mmh",
+                    "UID": 558202392
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/855134841.dds",
+                    "UID": 855134841
+                }
+            ]
+        },
+        {
+            "name": "City_building_013",
+            "Position": [
+                -42.288055419921875,
+                33.201576232910156,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 830149905,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/454588654.mmh",
+                    "UID": 454588654
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/453198627.dds",
+                    "UID": 453198627
+                }
+            ]
+        },
+        {
+            "name": "City_building_014",
+            "Position": [
+                -19.439706802368164,
+                32.061729431152344,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 639144294,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1706227547.mmh",
+                    "UID": 1706227547
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1311868643.dds",
+                    "UID": 1311868643
+                }
+            ]
+        },
+        {
+            "name": "City_building_016",
+            "Position": [
+                34.270423889160156,
+                -41.972747802734375,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 2003726734,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/964717753.mmh",
+                    "UID": 964717753
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/457375527.dds",
+                    "UID": 457375527
+                }
+            ]
+        },
+        {
+            "name": "City_building_016",
+            "Position": [
+                34.270423889160156,
+                -41.972747802734375,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 921238694,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2063621688.mmh",
+                    "UID": 2063621688
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/457375527.dds",
+                    "UID": 457375527
+                }
+            ]
+        },
+        {
+            "name": "City_building_017",
+            "Position": [
+                44.260082244873047,
+                -39.153720855712891,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 812513672,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/964717753.mmh",
+                    "UID": 964717753
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/457375527.dds",
+                    "UID": 457375527
+                }
+            ]
+        },
+        {
+            "name": "City_building_017",
+            "Position": [
+                44.260082244873047,
+                -39.153720855712891,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1147612685,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2063621688.mmh",
+                    "UID": 2063621688
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/457375527.dds",
+                    "UID": 457375527
+                }
+            ]
+        },
+        {
+            "name": "City_building_022",
+            "Position": [
+                -20.831323623657227,
+                -27.426488876342773,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 813655750,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1210115882.mmh",
+                    "UID": 1210115882
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/983485209.dds",
+                    "UID": 983485209
+                }
+            ]
+        },
+        {
+            "name": "City_building_023",
+            "Position": [
+                42.130641937255859,
+                37.4932861328125,
+                -1.9999999949504854e-06
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1203330184,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/558202392.mmh",
+                    "UID": 558202392
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/855134841.dds",
+                    "UID": 855134841
+                }
+            ]
+        },
+        {
+            "name": "City_building_024",
+            "Position": [
+                -20.572771072387695,
+                43.060829162597656,
+                -0.069193996489048004
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1566187147,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1744657320.mmh",
+                    "UID": 1744657320
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/653619480.dds",
+                    "UID": 653619480
+                }
+            ]
+        },
+        {
+            "name": "City_building_026",
+            "Position": [
+                31.51188850402832,
+                -16.446016311645508,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1033184862,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1546865265.mmh",
+                    "UID": 1546865265
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/983485209.dds",
+                    "UID": 983485209
+                }
+            ]
+        },
+        {
+            "name": "City_building_028",
+            "Position": [
+                13.38798999786377,
+                -33.755039215087891,
+                -9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1398521037,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1450174295.mmh",
+                    "UID": 1450174295
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1580455365.dds",
+                    "UID": 1580455365
+                }
+            ]
+        },
+        {
+            "name": "Object010",
+            "Position": [
+                -20.604873657226563,
+                4.066741943359375,
+                -0.47595998644828796
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1672045644,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/149201162.mmh",
+                    "UID": 149201162
+                }
+            ]
+        },
+        {
+            "name": "City_building_030",
+            "Position": [
+                -42.807239532470703,
+                -41.835563659667969,
+                -9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 843727995,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1450174295.mmh",
+                    "UID": 1450174295
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1580455365.dds",
+                    "UID": 1580455365
+                }
+            ]
+        },
+        {
+            "name": "City_building_031",
+            "Position": [
+                -34.679481506347656,
+                -41.835563659667969,
+                -9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1066543504,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1450174295.mmh",
+                    "UID": 1450174295
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1580455365.dds",
+                    "UID": 1580455365
+                }
+            ]
+        },
+        {
+            "name": "City_building_032",
+            "Position": [
+                -29.478403091430664,
+                21.01409912109375,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 283229665,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/643858563.mmh",
+                    "UID": 643858563
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1311868643.dds",
+                    "UID": 1311868643
+                }
+            ]
+        },
+        {
+            "name": "City_building_033",
+            "Position": [
+                -32.361495971679688,
+                42.37042236328125,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 537660211,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/155699063.mmh",
+                    "UID": 155699063
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/453198627.dds",
+                    "UID": 453198627
+                }
+            ]
+        },
+        {
+            "name": "City_building_034",
+            "Position": [
+                16.049516677856445,
+                -16.696884155273438,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1801582821,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1574498714.mmh",
+                    "UID": 1574498714
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/983485209.dds",
+                    "UID": 983485209
+                }
+            ]
+        },
+        {
+            "name": "City_building_035",
+            "Position": [
+                13.38798999786377,
+                -40.802516937255859,
+                -9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 2067694159,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1450174295.mmh",
+                    "UID": 1450174295
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1580455365.dds",
+                    "UID": 1580455365
+                }
+            ]
+        },
+        {
+            "name": "City_building_036",
+            "Position": [
+                -31.216331481933594,
+                33.201576232910156,
+                9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 516250741,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/454588654.mmh",
+                    "UID": 454588654
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/453198627.dds",
+                    "UID": 453198627
+                }
+            ]
+        },
+        {
+            "name": "City_building_037",
+            "Position": [
+                -20.317693710327148,
+                -16.163608551025391,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                1,
+                0
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1606522969,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2019689926.mmh",
+                    "UID": 2019689926
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/983485209.dds",
+                    "UID": 983485209
+                }
+            ]
+        },
+        {
+            "name": "City_building_038",
+            "Position": [
+                -41.649002075195313,
+                -16.495393753051758,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 344838048,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2045583427.mmh",
+                    "UID": 2045583427
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/983485209.dds",
+                    "UID": 983485209
+                }
+            ]
+        },
+        {
+            "name": "City_building_039",
+            "Position": [
+                -42.807239532470703,
+                -30.643888473510742,
+                -9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1250049995,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1450174295.mmh",
+                    "UID": 1450174295
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1580455365.dds",
+                    "UID": 1580455365
+                }
+            ]
+        },
+        {
+            "name": "City_building_040",
+            "Position": [
+                -34.679481506347656,
+                -30.643888473510742,
+                -9.9999999747524271e-07
+            ],
+            "Rotation": [
+                0,
+                0,
+                -0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 808423573,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1450174295.mmh",
+                    "UID": 1450174295
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1580455365.dds",
+                    "UID": 1580455365
+                }
+            ]
+        },
+        {
+            "name": "City_building_041",
+            "Position": [
+                30.695278167724609,
+                21.612646102905273,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0.70710676908493042,
+                0.70710676908493042
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 2006155257,
+            "ParentUID": 126298979,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1650850792.mmh",
+                    "UID": 1650850792
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/115861679.dds",
+                    "UID": 115861679
+                }
+            ]
+        }
+    ]
+}

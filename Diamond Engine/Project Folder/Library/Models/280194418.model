@@ -1,0 +1,45 @@
+{
+    "Model Objects": [
+        {
+            "name": "skybox",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                -0.7071068286895752,
+                0,
+                0,
+                0.70710670948028564
+            ],
+            "Scale": [
+                99.999992370605469,
+                99.999992370605469,
+                99.999992370605469
+            ],
+            "UID": 1066750993,
+            "ParentUID": 506989385,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/1821609877.mmh",
+                    "UID": 1821609877
+                },
+                {
+                    "Type": 3,
+                    "Active": true,
+                    "IsEmpty": false,
+                    "AssetPath": "",
+                    "LibraryPath": "Library\/Materials\/1049341562.dds",
+                    "UID": 1049341562
+                }
+            ]
+        }
+    ]
+}

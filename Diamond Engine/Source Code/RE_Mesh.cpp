@@ -336,7 +336,7 @@ void ResourceMesh::GenerateSphere(float radius, float sectorCount, float stackCo
 
 const char* ResourceMesh::SaveCustomFormatwithBones(uint& retSize)
 {
-	uint aCounts[6] = { indices_count, vertices_count, normals_count, texCoords_count, bones_count, weights_count };
+	uint aCounts[8] = { hasSkeleton,indices_count, vertices_count, normals_count, texCoords_count, bones_count, weights_count, bonesOffsets.size() };
 	retSize = sizeof(aCounts) + (sizeof(uint) * indices_count) + (sizeof(float) * vertices_count * 3) + (sizeof(float) * normals_count * 3) + (sizeof(float) * texCoords_count * 2)
 		+ (sizeof(int) * bones_count) + (sizeof(float) * weights_count) + (sizeof(float) * 16 * bonesOffsets.size()) + (sizeof(char) * 30 * bonesMap.size());
 
@@ -378,10 +378,7 @@ const char* ResourceMesh::SaveCustomFormatwithBones(uint& retSize)
 
 const char* ResourceMesh::SaveCustomFormat(uint& retSize)
 {
-	if (true)
-	{
-		uint aCounts[4] = { indices_count, vertices_count, normals_count, texCoords_count };
-	}
+	uint aCounts[5] = { hasSkeleton,indices_count, vertices_count, normals_count, texCoords_count};
 	retSize = sizeof(aCounts) + (sizeof(uint) * indices_count) + (sizeof(float) * vertices_count * 3) + (sizeof(float) * normals_count * 3) + (sizeof(float) * texCoords_count * 2);
 
 	char* fileBuffer = new char[retSize];
@@ -466,38 +463,22 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 		return;
 
 	char* cursor = fileBuffer;
-	uint variables[4];
+	uint variables[8];
 
 	uint bytes = sizeof(variables);
 	memcpy(variables, cursor, bytes);
-	indices_count = variables[0];
-	vertices_count = variables[1];
-	normals_count = variables[2];
-	texCoords_count = variables[3];
+	hasSkeleton = variables[0];
+	indices_count = variables[1];
+	vertices_count = variables[2];
+	normals_count = variables[3];
+	texCoords_count = variables[4];
+	bones_count = variables[5];
+	weights_count = variables[6];
+	uint bonesSize = variables[7];
 	cursor += bytes;
 
-	/*uint bones_variables[2];
-
-	bytes = sizeof(bones_variables);
-	memcpy(bones_variables, cursor, bytes);
-
-	if (bones_variables[0] > 0)
-	{
-		bones_count = bones_variables[0];
-		weights_count = bones_variables[1];
-		cursor += bytes;
-
-		bytes = sizeof(uint);
-		uint bonesSize = 0;
-		memcpy(&bonesSize, cursor, bytes);
-		cursor += bytes;
-
-		bonesTransforms.resize(bonesSize);
-		bonesOffsets.resize(bonesSize);
-	}*/
-
-
-
+	bonesTransforms.resize(bonesSize);
+	bonesOffsets.resize(bonesSize);
 
 	bytes = sizeof(uint) * indices_count;
 
@@ -520,7 +501,7 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 	memcpy(texCoords, cursor, bytes);
 	cursor += bytes;
 	
-	LoadBones(&cursor);
+	//LoadBones(&cursor);
 
 	//TODO: Should this be here?
 	localAABB.SetNegativeInfinity();
@@ -532,12 +513,26 @@ void ResourceMesh::LoadCustomFormat(const char* path)
 
 void ResourceMesh::LoadBones(char** cursor)
 {
+	uint bytes = 0;
 	if (bones_count > 0)
 	{
-
+		bytes = sizeof(int) * bones_count;
+		bones = new int[bones_count];
+		memcpy(bones, *cursor, bytes);
+		*cursor += bytes;
 	}
 	if (weights_count > 0)
 	{
-
+		bytes = sizeof(float) * weights_count;
+		boneWeights = new float[weights_count];
+		memcpy(boneWeights, *cursor, bytes);
+		*cursor += bytes;
 	}
+
+	//char name[30];
+	//for (uint i = 0; i < bonesTransforms.size(); ++i)
+	//{
+	//	bytes = sizeof(uint);
+	//	uint nameSize = 0;
+	//}
 }
