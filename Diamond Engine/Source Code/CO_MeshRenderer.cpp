@@ -56,7 +56,7 @@ void C_MeshRenderer::Update(float dt)
 
 void C_MeshRenderer::RenderMesh()
 {
-	if (_mesh == nullptr)
+	if (_mesh == nullptr && _animableMesh==nullptr)
 		return;
 
 
@@ -75,10 +75,19 @@ void C_MeshRenderer::RenderMesh()
 	if (material != nullptr && material->IsActive())
 		id = material->GetTextureID();
 
-	_mesh->RenderMesh(id);
+	ResourceMesh* meshRender;
+	if (_animableMesh != nullptr)
+	{
+		meshRender = _animableMesh;
+	}
+	else
+	{
+		meshRender = _mesh;
+	}
+	meshRender->RenderMesh(id);
 
 	if (vertexNormals || faceNormals)
-		_mesh->RenderMeshDebug(&vertexNormals, &faceNormals);
+		meshRender->RenderMeshDebug(&vertexNormals, &faceNormals);
 
 	if (transform != nullptr)
 		glPopMatrix();
@@ -204,12 +213,21 @@ bool C_MeshRenderer::IsInsideFrustum(Frustum* camFrustum)
 void C_MeshRenderer::SetRenderMesh(ResourceMesh* mesh)
 { 
 	_mesh = mesh;
+	if (mesh->hasSkeleton)
+	{
+		_animableMesh = mesh;
+		globalOBB = _animableMesh->localAABB;
+	}
+	else
+	{
+		globalOBB = _mesh->localAABB;
+	}
 	//_mesh->LoadCustomFormat(_mesh->GetLibraryPath());
 
 	if (mesh == nullptr)
 		return;
 
-	globalOBB = _mesh->localAABB;
+	
 	globalOBB.Transform(gameObject->transform->globalTransform);
 
 	// Generate global AABB
@@ -220,4 +238,9 @@ void C_MeshRenderer::SetRenderMesh(ResourceMesh* mesh)
 ResourceMesh* C_MeshRenderer::GetRenderMesh()
 {
 	return _mesh;
+}
+
+ResourceMesh* C_MeshRenderer::GetRenderAnimableMesh()
+{
+		return _animableMesh;
 }

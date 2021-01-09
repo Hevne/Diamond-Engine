@@ -25,6 +25,7 @@ public:
 
 	void SetRenderMesh(ResourceMesh* mesh);
 	ResourceMesh* GetRenderMesh();
+	ResourceMesh* GetRenderAnimableMesh();
 
 //private:
 
@@ -38,4 +39,5 @@ public:
 
 private:
 	ResourceMesh* _mesh;
+	ResourceMesh* _animableMesh=nullptr;
 };

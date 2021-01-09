@@ -102,6 +102,28 @@ bool ResourceMesh::UnloadFromMemory()
 
 void ResourceMesh::RenderMesh(GLuint textureID)
 {
+	if (hasSkeleton)
+	{
+		if (vertices_count != 0)
+		{
+			glGenBuffers(1, (GLuint*) & (vertices_id));
+			glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, &vertices[0], GL_DYNAMIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			//glVertexPointer(3, GL_FLOAT, 0, NULL);
+		}
+		if (normals_count != 0)
+		{
+			//Normals buffer
+			glGenBuffers(1, (GLuint*) & (normalbuffer_id));
+			glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, &normals[0], GL_DYNAMIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			//glEnableVertexAttribArray(2);
+			//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+		}
+
+	}
 	//ASK: glDrawElementsInstanced()?
 	if(textureID != 0 && (generalWireframe != nullptr && *generalWireframe == false))
 		glBindTexture(GL_TEXTURE_2D, textureID);
