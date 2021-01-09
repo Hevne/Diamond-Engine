@@ -71,7 +71,6 @@ public:
 
 	//TODO: Move this to file system
 	const char* SaveCustomFormatwithBones(uint& retSize);
-	const char* SaveCustomFormat(uint& retSize);
 	void SaveBones(char** cursor);
 	void LoadCustomFormat(const char*);
 	void LoadBones(char** cursor);

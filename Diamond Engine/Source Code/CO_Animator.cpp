@@ -78,6 +78,7 @@ void C_Animator::Update(float dt)
 		std::vector<GameObject*> bones;
 		rootBone->CollectChilds(bones);
 		DrawBones(bones[0]);
+		gameObject->GetBoneChildTransforms();
 	}
 }
 

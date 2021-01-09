@@ -4,6 +4,9 @@
 #include<string>
 
 #include "Component.h"
+#include "DEResource.h"
+#include "RE_Mesh.h"
+
 #include"parson/parson.h"
 
 class C_Transform;
@@ -39,6 +42,10 @@ public:
 
 	void RemoveChild(GameObject*);
 	void CollectChilds(std::vector<GameObject*>& vector);
+
+	void GetBoneChildTransforms();
+	void RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root);
+	GameObject* GetFirstChild();
 
 	GameObject* parent;
 	C_Transform* transform;

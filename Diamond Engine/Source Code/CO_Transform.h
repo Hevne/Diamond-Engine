@@ -33,6 +33,7 @@ public:
 	void SetTransformWithGlobal(float4x4& globalMat);
 
 	const float* GetGlobalTransposed() const;
+	float4x4 GetGlobalMatrix();
 	void ResetTransform();
 
 	float3 GetForward();

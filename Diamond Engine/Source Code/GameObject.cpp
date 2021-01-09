@@ -6,6 +6,7 @@
 #include "CO_Material.h"
 #include "CO_Camera.h"
 #include "CO_Animator.h"
+#include "RE_Mesh.h"
 
 #include"MaykMath.h"
 #include"parson/parson.h"
@@ -265,4 +266,43 @@ void GameObject::CollectChilds(std::vector<GameObject*>& vector)
 	vector.push_back(this);
 	for (uint i = 0; i < children.size(); i++)
 		children[i]->CollectChilds(vector);
+}
+
+void GameObject::GetBoneChildTransforms()
+{
+	//Get the component and resource mesh;
+	GameObject* meshObject = GetFirstChild();
+	
+	C_MeshRenderer* co_mesh = nullptr;
+	co_mesh = dynamic_cast<C_MeshRenderer*>(meshObject->GetComponent(Component::Type::MeshRenderer));
+	
+	ResourceMesh* animablemesh = co_mesh->GetRenderAnimableMesh();
+
+
+	//Recursively check bonemap and assign transforms
+	RecursiveGetBones(animablemesh, this);
+}
+
+void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root)
+{
+	if (root->children.size() > 0)
+	{
+		for (int i = 0; i < root->children.size(); i++)
+		{
+			if ((animablemesh->bonesMap.find(root->children[i]->name.c_str()) == (animablemesh->bonesMap.end()))) continue;
+
+			uint bone_ID = animablemesh->bonesMap.find(root->children[i]->name.c_str())->second;
+
+			C_Transform* transform = dynamic_cast<C_Transform*>(root->children[i]->GetComponent(Component::Type::Transform));
+			animablemesh->bonesTransforms[bone_ID] = transform->GetGlobalMatrix();
+
+			RecursiveGetBones(animablemesh, root->children[i]);
+		}
+	}
+}
+
+
+GameObject* GameObject::GetFirstChild()
+{
+	return this->children[0];
 }

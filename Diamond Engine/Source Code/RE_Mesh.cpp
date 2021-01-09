@@ -399,37 +399,6 @@ const char* ResourceMesh::SaveCustomFormatwithBones(uint& retSize)
 	return fileBuffer; 
 }
 
-const char* ResourceMesh::SaveCustomFormat(uint& retSize)
-{
-	uint aCounts[5] = { hasSkeleton,indices_count, vertices_count, normals_count, texCoords_count};
-	retSize = sizeof(aCounts) + (sizeof(uint) * indices_count) + (sizeof(float) * vertices_count * 3) + (sizeof(float) * normals_count * 3) + (sizeof(float) * texCoords_count * 2);
-
-	char* fileBuffer = new char[retSize];
-	char* cursor = fileBuffer;
-
-	uint bytes = sizeof(aCounts);
-	memcpy(cursor, aCounts, bytes);
-	cursor += bytes;
-
-	bytes = sizeof(uint) * indices_count;
-	memcpy(cursor, indices, bytes);
-	cursor += bytes;
-
-	bytes = sizeof(float) * vertices_count * 3;
-	memcpy(cursor, vertices, bytes);
-	cursor += bytes;
-
-	bytes = sizeof(float) * normals_count * 3;
-	memcpy(cursor, normals, bytes);
-	cursor += bytes;
-
-	bytes = sizeof(float) * texCoords_count * 2;
-	memcpy(cursor, texCoords, bytes);
-	cursor += bytes;
-
-	return fileBuffer;
-}
-
 void ResourceMesh::SaveBones(char** cursor)
 {
 	uint bytes = 0;

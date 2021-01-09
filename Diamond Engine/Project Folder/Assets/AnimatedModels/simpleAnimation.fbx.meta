@@ -2,5 +2,11 @@
     "Assets Path": "Assets\/AnimatedModels\/simpleAnimation.fbx",
     "Library Path": "Library\/Models\/1492107281.model",
     "UID": 1492107281,
-    "Type": 1
+    "Type": 1,
+    "Meshes Inside": [
+        494502792
+    ],
+    "Animations Inside": [
+        1468536775
+    ]
 }

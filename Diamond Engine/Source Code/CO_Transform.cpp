@@ -207,6 +207,11 @@ const float* C_Transform::GetGlobalTransposed() const
 	return globalTransformTRANS.ptr();
 }
 
+float4x4 C_Transform::GetGlobalMatrix()
+{
+	return globalTransform;
+}
+
 void C_Transform::ResetTransform()
 {
 	position = eulerRotation = float3::zero;

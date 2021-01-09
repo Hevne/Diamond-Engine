@@ -242,5 +242,5 @@ ResourceMesh* C_MeshRenderer::GetRenderMesh()
 
 ResourceMesh* C_MeshRenderer::GetRenderAnimableMesh()
 {
-		return _animableMesh;
+	return _animableMesh;
 }
