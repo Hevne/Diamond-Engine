@@ -295,7 +295,35 @@ void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root,
 			C_Transform* transform = dynamic_cast<C_Transform*>(root->children[i]->GetComponent(Component::Type::Transform));
 			animablemesh->bonesTransforms[bone_ID] = transform->GetGlobalMatrix();
 
-			CalculateDelta(dynamic_cast<C_Transform*>(meshObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix(), animablemesh->bonesTransforms[bone_ID], animablemesh->bonesOffsets[bone_ID]);
+			float4x4 delta = CalculateDelta(dynamic_cast<C_Transform*>(meshObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix(), animablemesh->bonesTransforms[bone_ID], animablemesh->bonesOffsets[bone_ID]);
+
+			//Iterate all mesh vertices
+			for (uint j = 0; j < animablemesh->bones_count; j++)
+			{
+				//Iterate all 4 bones
+				for (uint k = 0; k < 4; k++)
+				{
+					int boneID = animablemesh->bones[j * 4 + k];
+					float boneWeight = animablemesh->boneWeights[j * 4 + k];
+
+					if (boneID == -1) continue;
+
+					float3 vertex = delta.TransformPos(float3(&animablemesh->vertices[j * 3]));
+
+					animablemesh->vertices[j * 3] += vertex.x * boneWeight;
+					animablemesh->vertices[j * 3 + 1] += vertex.y * boneWeight;
+					animablemesh->vertices[j * 3 + 2] += vertex.z * boneWeight;
+
+					if (animablemesh->normals_count > 0) {
+						float3 normal = delta.TransformPos(float3(&animablemesh->normals[j * 3]));
+						animablemesh->normals[j * 3] += normal.x * boneWeight;
+						animablemesh->normals[j * 3 + 1] += normal.y * boneWeight;
+						animablemesh->normals[j * 3 + 2] += normal.z * boneWeight;
+					}
+				}
+			}
+
+
 			RecursiveGetBones(animablemesh, root->children[i], meshObject);
 		}
 	}
