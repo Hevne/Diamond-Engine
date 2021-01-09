@@ -106,7 +106,6 @@ void ResourceMesh::RenderMesh(GLuint textureID)
 	{
 		if (vertices_count != 0)
 		{
-			glGenBuffers(1, (GLuint*) & (vertices_id));
 			glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, &vertices[0], GL_DYNAMIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -115,7 +114,6 @@ void ResourceMesh::RenderMesh(GLuint textureID)
 		if (normals_count != 0)
 		{
 			//Normals buffer
-			glGenBuffers(1, (GLuint*) & (normalbuffer_id));
 			glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, &normals[0], GL_DYNAMIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
