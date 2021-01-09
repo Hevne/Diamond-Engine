@@ -44,7 +44,8 @@ public:
 	void CollectChilds(std::vector<GameObject*>& vector);
 
 	void GetBoneChildTransforms();
-	void RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root);
+	void RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root, GameObject* meshObject);
+	float4x4 CalculateDelta(float4x4 meshGlobal, float4x4 boneGlobal, float4x4 Offset);
 	GameObject* GetFirstChild();
 
 	GameObject* parent;

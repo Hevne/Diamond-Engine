@@ -278,12 +278,11 @@ void GameObject::GetBoneChildTransforms()
 	
 	ResourceMesh* animablemesh = co_mesh->GetRenderAnimableMesh();
 
-
 	//Recursively check bonemap and assign transforms
-	RecursiveGetBones(animablemesh, this);
+	RecursiveGetBones(animablemesh, this, meshObject);
 }
 
-void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root)
+void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root, GameObject* meshObject)
 {
 	if (root->children.size() > 0)
 	{
@@ -296,9 +295,18 @@ void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root)
 			C_Transform* transform = dynamic_cast<C_Transform*>(root->children[i]->GetComponent(Component::Type::Transform));
 			animablemesh->bonesTransforms[bone_ID] = transform->GetGlobalMatrix();
 
-			RecursiveGetBones(animablemesh, root->children[i]);
+			CalculateDelta(dynamic_cast<C_Transform*>(meshObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix(), animablemesh->bonesTransforms[bone_ID], animablemesh->bonesOffsets[bone_ID]);
+			RecursiveGetBones(animablemesh, root->children[i], meshObject);
 		}
 	}
+}
+
+float4x4 GameObject::CalculateDelta(float4x4 meshGlobal, float4x4 boneGlobal, float4x4 Offset)
+{
+	float4x4 meshInverted = meshGlobal.Inverted();
+	float4x4 boneLocal = meshInverted * boneGlobal;
+	float4x4 Delta = boneLocal * Offset;
+	return Delta;
 }
 
 
