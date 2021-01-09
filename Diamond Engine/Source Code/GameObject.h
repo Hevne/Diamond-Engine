@@ -4,6 +4,7 @@
 #include<string>
 
 #include "Component.h"
+#include "CO_MeshRenderer.h"
 #include "DEResource.h"
 #include "RE_Mesh.h"
 
@@ -44,6 +45,7 @@ public:
 	void CollectChilds(std::vector<GameObject*>& vector);
 
 	void GetBoneChildTransforms();
+	C_MeshRenderer* GetMesh();
 	void RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root, GameObject* meshObject);
 	float4x4 CalculateDelta(float4x4 meshGlobal, float4x4 boneGlobal, float4x4 Offset);
 	GameObject* GetFirstChild();

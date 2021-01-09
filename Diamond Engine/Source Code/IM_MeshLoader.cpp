@@ -224,17 +224,10 @@ ResourceMesh* MeshLoader::LoadMesh(aiMesh* importedMesh, uint oldUID)
 
 	_mesh->generalWireframe = &EngineExternal->moduleRenderer3D->wireframe;
 
-	//TODO: Save on own file format
 	uint size = 0;
 	char* buffer;
-	/*if (_mesh->hasSkeleton)
-	{*/
-		buffer = (char*)_mesh->SaveCustomFormatwithBones(size);
-	/*}
-	else
-	{
-		buffer = (char*)_mesh->SaveCustomFormat(size);
-	}*/
+	buffer = (char*)_mesh->SaveCustomFormatwithBones(size);
+
 	FileSystem::Save(file.c_str(), buffer, size, false);
 	RELEASE_ARRAY(buffer);
 
@@ -275,7 +268,7 @@ void MeshLoader::LoadBones(const aiMesh* importedMesh, ResourceMesh* ourMesh)
 		ourMesh->bonesOffsets.push_back(offset);
 
 		//Iterates all affected mesh vertices
-		for (int i = 0; i < bone->mNumWeights; i++)
+		for (int i = 0; i < bone->mNumWeights; ++i)
 		{
 			uint index = bone->mWeights[i].mVertexId;
 			//Fills each bone or weight array empty slot (-1)
@@ -285,6 +278,7 @@ void MeshLoader::LoadBones(const aiMesh* importedMesh, ResourceMesh* ourMesh)
 				{
 					ourMesh->bones[index * 4 + j] = boneIndex;
 					ourMesh->boneWeights[index + 4 + j] = bone->mWeights[i].mWeight;
+					break;
 				}
 			}
 		}

@@ -213,21 +213,12 @@ bool C_MeshRenderer::IsInsideFrustum(Frustum* camFrustum)
 void C_MeshRenderer::SetRenderMesh(ResourceMesh* mesh)
 { 
 	_mesh = mesh;
-	if (mesh->hasSkeleton)
-	{
-		_animableMesh = mesh;
-		globalOBB = _animableMesh->localAABB;
-	}
-	else
-	{
-		globalOBB = _mesh->localAABB;
-	}
 	//_mesh->LoadCustomFormat(_mesh->GetLibraryPath());
 
 	if (mesh == nullptr)
 		return;
 
-	
+	globalOBB = _mesh->localAABB;
 	globalOBB.Transform(gameObject->transform->globalTransform);
 
 	// Generate global AABB
@@ -253,7 +244,7 @@ void C_MeshRenderer::StartBoneDeformation()
 	{
 		newMesh = true;
 		_animableMesh = new ResourceMesh(0); // falta id
-		ResourceMesh* rMesh =  (R_Mesh*)GetResource(); // get resource
+		ResourceMesh* rMesh = gameObject->GetMesh()->_mesh; // get resource
 		_animableMesh->vertices_count = rMesh->vertices_count;
 		_animableMesh->normals_count = rMesh->normals_count;
 		_animableMesh->indices_count = rMesh->indices_count;
@@ -285,11 +276,11 @@ void C_MeshRenderer::StartBoneDeformation()
 
 void C_MeshRenderer::DeformAnimMesh()
 {
-	//Just for security
+	////Just for security
 	if (_animableMesh == nullptr)
 		StartBoneDeformation();
 
-	ResourceMesh* rMesh = (ResourceMesh*)GetResource();
+	ResourceMesh* rMesh = gameObject->GetMesh()->_mesh;
 
 	std::map<std::string, GameObject*> boneMapping;
 	GetBoneMapping(boneMapping);
@@ -302,24 +293,27 @@ void C_MeshRenderer::DeformAnimMesh()
 	{
 		GameObject* bone = boneMapping[it->first];
 
-		//TODO: Here we are just picking bone global transform, we need the bone transform matrix
-		float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
-		mat = mat * dynamic_cast<C_Transform*>( bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
-		mat = dynamic_cast<C_Transform*>( gameObject->GetComponent(Component::Type::Transform))->localTransform.Inverted() * mat;
+		if (bone != nullptr)
+		{
+			//TODO: Here we are just picking bone global transform, we need the bone transform matrix
+			float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
+			mat = mat * dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
+			mat = dynamic_cast<C_Transform*>(gameObject->GetComponent(Component::Type::Transform))->localTransform.Inverted()* mat;
 
-		mat = mat * rMesh->boneOffsets[it->second];
-		boneTransforms[it->second] = mat;
+			mat = mat * rMesh->bonesOffsets[it->second];
+			boneTransforms[it->second] = mat;
+		}
 	}
 
 	//Iterate all mesh vertex
-	for (uint v = 0; v < rMesh->buffersSize[R_Mesh::b_vertices]; ++v)
+	for (uint v = 0; v < rMesh->vertices_count; ++v)
 	{
 		float3 originalV(&rMesh->vertices[v * 3]);
 
 		//Iterate all 4 bones for that vertex
 		for (uint b = 0; b < 4; ++b)
 		{
-			int boneID = rMesh->boneIDs[v * 4 + b];
+			int boneID = rMesh->bones[v * 4 + b];
 			float boneWeight = rMesh->boneWeights[v * 4 + b];
 
 			if (boneID == -1) continue;
@@ -327,20 +321,32 @@ void C_MeshRenderer::DeformAnimMesh()
 			//Transforming original mesh vertex with bone transformation matrix
 			float3 toAdd = boneTransforms[boneID].TransformPos(float3(&rMesh->vertices[v * 3]));
 
-			animMesh->vertices[v * 3] += toAdd.x * boneWeight;
-			animMesh->vertices[v * 3 + 1] += toAdd.y * boneWeight;
-			animMesh->vertices[v * 3 + 2] += toAdd.z * boneWeight;
+			_animableMesh->vertices[v * 3] += toAdd.x * boneWeight;
+			_animableMesh->vertices[v * 3 + 1] += toAdd.y * boneWeight;
+			_animableMesh->vertices[v * 3 + 2] += toAdd.z * boneWeight;
 
-			if (rMesh->buffersSize[R_Mesh::b_normals] > 0)
+			if (rMesh->normals_count > 0)
 			{
 				//Transforming original mesh normal with bone transformation matrix
 				toAdd = boneTransforms[boneID].TransformPos(float3(&rMesh->normals[v * 3]));
-				animMesh->normals[v * 3] += toAdd.x * boneWeight;
-				animMesh->normals[v * 3 + 1] += toAdd.y * boneWeight;
-				animMesh->normals[v * 3 + 2] += toAdd.z * boneWeight;
+				_animableMesh->normals[v * 3] += toAdd.x * boneWeight;
+				_animableMesh->normals[v * 3 + 1] += toAdd.y * boneWeight;
+				_animableMesh->normals[v * 3 + 2] += toAdd.z * boneWeight;
 			}
 		}
 	}
 
-	animMesh->LoadSkinnedBuffers();
+	_animableMesh->LoadSkinnedBuffers();
+}
+
+void C_MeshRenderer::GetBoneMapping(std::map<std::string, GameObject*>& boneMapping)
+{
+	boneMapping.clear();
+	std::vector<GameObject*> gameObjects;
+	rootBone->CollectChilds(gameObjects);
+
+	for (uint i = 0; i < gameObjects.size(); ++i)
+	{
+		boneMapping[gameObjects[i]->name] = gameObjects[i];
+	}
 }

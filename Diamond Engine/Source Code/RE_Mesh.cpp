@@ -102,26 +102,6 @@ bool ResourceMesh::UnloadFromMemory()
 
 void ResourceMesh::RenderMesh(GLuint textureID)
 {
-	if (hasSkeleton)
-	{
-		if (vertices_count != 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, &vertices[0], GL_DYNAMIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			//glVertexPointer(3, GL_FLOAT, 0, NULL);
-		}
-		if (normals_count != 0)
-		{
-			//Normals buffer
-			glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, &normals[0], GL_DYNAMIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			//glEnableVertexAttribArray(2);
-			//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-		}
-
-	}
 	//ASK: glDrawElementsInstanced()?
 	if(textureID != 0 && (generalWireframe != nullptr && *generalWireframe == false))
 		glBindTexture(GL_TEXTURE_2D, textureID);
@@ -249,54 +229,35 @@ vec3 ResourceMesh::GetVectorFromIndex(float* startValue)
 
 void ResourceMesh::LoadSkinnedBuffers(bool init)
 {
-	//if (init)
-	//{
-	//	//Create a vertex array object which will hold all buffer objects
-	//	glGenVertexArrays(1, &VAO);
-	//	glBindVertexArray(VAO);
+	if (init)
+	{
+		glGenBuffers(1, (GLuint*)&vertices_id);
 
-	//	//Create a vertex buffer object to hold vertex positions
-	//	glGenBuffers(1, &buffers[b_vertices]);
+		glGenBuffers(1, (GLuint*)&indices_id);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices_count, &indices[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	//	//Create an element buffer object to hold indices
-	//	glGenBuffers(1, &buffers[b_indices]);
-	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[b_indices]);
-	//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * buffersSize[b_indices], indices, GL_STATIC_DRAW);
+		if (texCoords_count > 0)
+		{
+			glGenBuffers(1, (GLuint*)&texCoords_id);
+			glBindBuffer(GL_ARRAY_BUFFER, texCoords_id);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * texCoords_count * 2, texCoords, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+		glGenBuffers(1, (GLuint*)&normalbuffer_id);
+	}
 
-	//	//Set the vertex attrib pointer
-	//	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, &vertices[0], GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	//	//Create the array buffer for tex coords and enable attrib pointer
-	//	if (buffersSize[b_tex_coords] > 0)
-	//	{
-	//		glGenBuffers(1, &buffers[b_tex_coords]);
-	//		glBindBuffer(GL_ARRAY_BUFFER, buffers[b_tex_coords]);
-	//		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffersSize[b_tex_coords] * 2, tex_coords, GL_STATIC_DRAW);
-
-	//		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-	//		glEnableVertexAttribArray(1);
-	//	}
-
-	//	glGenBuffers(1, &buffers[b_normals]);
-	//}
-
-	//glBindVertexArray(VAO);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, buffers[b_vertices]);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffersSize[b_vertices] * 3, vertices, GL_STREAM_DRAW);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
-	////Create the array buffer for normals and enable attrib pointer
-	//if (buffersSize[b_normals] > 0)
-	//{
-	//	glBindBuffer(GL_ARRAY_BUFFER, buffers[b_normals]);
-	//	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffersSize[b_normals] * 3, normals, GL_STREAM_DRAW);
-
-	//	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	//	glEnableVertexAttribArray(2);
-	//}
-
-	//glBindVertexArray(0);
+	if (normals_count > 0)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, &normals[0], GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
 }
 
 #pragma region Sphere generation

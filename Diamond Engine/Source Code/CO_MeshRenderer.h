@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-
+#include <map>
 #include"MathGeoLib/include/Geometry/AABB.h"
 #include"MathGeoLib/include/Geometry/OBB.h"
 
