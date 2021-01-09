@@ -27,6 +27,11 @@ public:
 	ResourceMesh* GetRenderMesh();
 	ResourceMesh* GetRenderAnimableMesh();
 
+	void StartBoneDeformation();
+	void DeformAnimMesh();
+
+	void GetBoneMapping(std::map<std::string, GameObject*>& boneMapping);
+
 //private:
 
 	//Pointer to a mesh stored at ModuleRenderer3D
@@ -36,8 +41,9 @@ public:
 	OBB globalOBB;
 
 	bool faceNormals, vertexNormals, showAABB, showOBB;
+	GameObject* rootBone = nullptr;
 
 private:
 	ResourceMesh* _mesh;
-	ResourceMesh* _animableMesh=nullptr;
+	ResourceMesh* _animableMesh = nullptr;
 };

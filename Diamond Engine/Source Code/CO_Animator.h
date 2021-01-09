@@ -40,6 +40,7 @@ public:
 	void Update(float dt) override;
 
 	void UpdateChannelsTransform(const ResourceAnimation* settings, const ResourceAnimation* blend, float blendRatio);
+	void UpdateMeshAnimation(GameObject* gameObject);
 
 	float3 GetChannelPosition(const Channel& channel, float currentKey, float3 default) const;
 	Quat GetChannelRotation(const Channel& channel, float currentKey, Quat default) const;

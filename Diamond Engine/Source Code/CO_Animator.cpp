@@ -38,7 +38,7 @@ void C_Animator::Start()
 {
 	//hard coded first bone
 	rootBone = gameObject->children[1]->children[0];
-	//gameObject->children[0]->GetComponent<C_Mesh>()->rootBone = rootBone;
+	dynamic_cast<C_MeshRenderer*>(gameObject->children[0]->GetComponent(Component::Type::MeshRenderer))->rootBone = rootBone;
 
 	if (rootBone == nullptr) return;
 
@@ -75,6 +75,7 @@ void C_Animator::Update(float dt)
 		}
 
 		UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
+		UpdateMeshAnimation(gameObject->children[0]);
 		std::vector<GameObject*> bones;
 		rootBone->CollectChilds(bones);
 		DrawBones(bones[0]);
@@ -236,6 +237,20 @@ void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, cons
 		transform->localScale = scale;
 		transform->updateTransform = true;
 	}
+}
+
+void C_Animator::UpdateMeshAnimation(GameObject* gameObject)
+{
+	C_MeshRenderer* mesh = dynamic_cast<C_MeshRenderer*>( gameObject->GetComponent(Component::Type::MeshRenderer));
+	if (mesh != nullptr)
+	{
+		mesh->StartBoneDeformation();
+		mesh->DeformAnimMesh();
+		//App->renderer3D->LoadBuffers(mesh->animMesh);
+	}
+
+	for (uint i = 0; i < gameObject->children.size(); i++)
+		UpdateMeshAnimation(gameObject->children[i]);
 }
 
 Quat C_Animator::GetChannelRotation(const Channel& channel, float currentKey, Quat default) const
