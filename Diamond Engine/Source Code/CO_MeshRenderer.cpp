@@ -308,9 +308,9 @@ void C_MeshRenderer::DeformAnimMesh()
 		if (bone != nullptr)
 		{
 			//TODO: Here we are just picking bone global transform, we need the bone transform matrix
-			float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
-			mat = mat * dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
-			mat = dynamic_cast<C_Transform*>(gameObject->GetComponent(Component::Type::Transform))->localTransform.Inverted()* mat;
+			
+			float4x4 mat = dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
+			mat = dynamic_cast<C_Transform*>(gameObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted()* mat;
 
 			mat = mat * rMesh->bonesOffsets[it->second];
 			boneTransforms[it->second] = mat;
