@@ -1,5 +1,6 @@
 # Diamond-Engine
 
+
 Diamond Engine is currently under active development as the "Engine Development" subject project for the CITM Bachelor's degree in Video Game Design and Development. Also hoping to be used as the base engine for the "Project 3" subject on the same degree. 
 
 Diamond Engine is a fast C++ 3D game engine, developed with SDL2 and OpenGL. The engine targets optimal memory management, fast starting and loading speeds and simple use. This will provide a fast, simple and powerful tool to prototype good looking games the fastest way possible.
@@ -12,10 +13,22 @@ Diamond Engine is a fast C++ 3D game engine, developed with SDL2 and OpenGL. The
 
 Diamond Engine is currently under indie development by one person, you can check the repository [HERE](https://github.com/MayKoder/Diamond-Engine)
 
+## Collaboration with Unknown Engine Team
+
+Diamond Engine core is under Miquel Suau González's intellectual property. For this assignment and last deploy, we, the team of Unknown Engine have forked from Diamond Engine pre-last release and implemented an Skeleton Animation system.
+
 <br></br>
 # Creators
 
 This engine was made by Miquel Suau Gonzàlez: [GitHub: @MayKoder](https://github.com/MayKoder)
+
+## Collaborators
+
+As collaborators, the Unknown Engine team which has been in charge of implementing the Skeletal Animation System
+
+* Eudald Garrofé Flix : [GitHub: @Hevne](https://github.com/Hevne)
+
+* Jordi Pardo Gutiérrez: [GitHub: @Jordi-Pardo](https://github.com/Jordi-Pardo)
 
 <br></br>
 # Execution and controls
@@ -27,6 +40,14 @@ Simple guide to execute and use the engine:
 - Extract the .zip file anywhere
 - Open the extracted folder and go to "Diamond-Engine" folder
 - Double-click the "Diamond Engine.exe" file
+
+### Skeletal Controls
+
+- Pressing 1 key reproduces the attack animation
+- Holding down 2 key loops the running animation
+- Clicking on play starts reproducing the animation
+- Clicking on stop while on play state stops reproducing the animation
+- Clicking on pause while on play state freezes the animation reproduction.
 
 ### Controls
 - Right click the scene window to rotate the camera like a FPS game.
@@ -41,6 +62,11 @@ Simple guide to execute and use the engine:
 
 <br></br>
 # Features
+
+Engine v0.1.1
+- Added animations import and load from FBXs
+- Mesh skinning for models that have an animation
+- Linked animations playing with the gamestate (play, pause, stop)
 
 Engine v0.1
  - Take cool screenshots with the "Take Screenshot" button located on the top-middle bar. (Screenshots will ignore editor layer).
@@ -74,14 +100,6 @@ Engine v0.2
  - **Innovation:** You can now delete assets from the asset window and the library and meta files will be deleted as well. 
  - **Innovation:** Multiple scene display, enjoy the views from the game camera and move it around. No debug info will be displayed on the game camera and you can render the editor and the game camera at the same time. 
  
-<br></br>
-# Short-Term TODO list:
-
- - Resource manager should update files if the last modified date is changed, but if a file is changed while the engine is closed, this update won't happen until the file is changed again with the editor running. 
- - Add icons to every button possible, images are better than text. 
- - Clear out outdated code comments. 
- - .model file optimizations, saving a lot of useless data. 
-
 <br></br>
 ## MIT License
 
