@@ -29,7 +29,14 @@ Also, he worked on dividing the animations and the blend between them.
 
 ### Skeletal Animation System
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Our system for this assignment consists on reading the animations inside an FBX, saving them under our own format for further loading into a new Component Animator which will store the keyframes and update our bones.
+
+Later, we use our bones information to link the mesh vertices and normals in order to skin our mesh with the bones movement. Also, we control the state of the current animation playing on the scene using play/stop/pause from the editor.
+
+
+<iframe src="https://giphy.com/embed/NWRjNcmIMKBbKqewdk" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/NWRjNcmIMKBbKqewdk">via GIPHY</a></p>
+
+
 
 
 ### Short Video
