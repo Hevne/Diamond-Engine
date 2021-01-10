@@ -64,14 +64,20 @@ void C_Animator::Update(float dt)
 			Start();
 		}
 		
-		if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_2) == KEY_STATE::KEY_REPEAT) {
+		if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_2) == KEY_STATE::KEY_DOWN) {
+			time = 0.f;
+			currentAnimation = animations[1];
+		}
+		else if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_2) == KEY_STATE::KEY_REPEAT) {
 			currentAnimation = animations[1];
 		}
 		else if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_2) == KEY_STATE::KEY_UP) {
+			time = 0.f;
 			currentAnimation = animations[0];
 		}
 
 		if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_1) == KEY_STATE::KEY_DOWN) {
+			time = 0.f;
 			currentAnimation = animations[2];
 		}
 
@@ -111,7 +117,8 @@ void C_Animator::Update(float dt)
 				time = 0.f;
 			}
 			else {
-				playing = false;
+				currentAnimation = animations[0];
+				time = 0.f;
 				return;
 			}
 		}
@@ -161,11 +168,29 @@ bool C_Animator::OnEditor()
 
 		if (_anim != nullptr)
 		{
-			ImGui::Text("Previous Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", previous_animation);
-			ImGui::Text("Current Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", current_animation);
+			if (currentAnimation == nullptr) {
+			ImGui::Text("Current Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "None");
+			}
+			else {
+				ImGui::Text("Current Animation: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%s", currentAnimation->animationName.c_str());
+			}
 			ImGui::Text("Previous Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%f", prevAnimTime);
 			ImGui::Text("Current Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", currentTimeAnimation);
 			ImGui::Text("blendTime: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", blendTime);
+
+			ImGui::Text("Idle Animation");
+			ImGui::InputInt("##Idle Start Frame", (int*)&animations[0]->initTimeAnim, 1, 1);
+			ImGui::InputFloat("##Idle End Frame", &animations[0]->duration, 1, 1);
+
+			ImGui::Text("Run Animation");
+			ImGui::InputInt("##Run Start Frame", (int*)&animations[1]->initTimeAnim, 1, 1);
+			ImGui::InputFloat("##Run End Frame", &animations[1]->duration, 1, 1);
+
+			ImGui::Text("Attack Animation");
+			ImGui::InputInt("##Attack Start Frame", (int*)&animations[2]->initTimeAnim, 1, 1);
+			ImGui::InputFloat("##Attack End Frame", &animations[2]->duration, 1, 1);
+
+
 			if (ImGui::Button("Idle animation")) {
 				currentAnimation = animations[0];
 				time = 0.f;
@@ -187,33 +212,7 @@ bool C_Animator::OnEditor()
 			{
 				ImGui::Text("Playing: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "false");
 			}
-			if (channeIsLinked)
-			{
-				ImGui::Text("Channel Linked: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "true");
-			}
-			else
-			{
-				ImGui::Text("Channel Linked: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "false");
-			}
-			if (bonesLinked)
-			{
-				ImGui::Text("Bones Linked: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "true");
-			}
-			else
-			{
-				ImGui::Text("Bones Linked: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "false");
-			}
 
-			ImGui::Spacing();
-
-			if (ImGui::Button("Link/Unlink channels to bones")) {
-				//LinkChannelBones(gameObject);
-				playing = !playing;
-				channeIsLinked = !channeIsLinked;
-				bonesLinked = bonesLinked;
-
-			}
-		
 
 			ImGui::Spacing();
 
@@ -267,8 +266,8 @@ void C_Animator::SetAnimation(ResourceAnimation* anim)
 
 	ResourceAnimation* run = new ResourceAnimation(*_anim);
 	run->animationName = "Run";
-	run->initTimeAnim = 48;
-	run->duration = 71;
+	run->initTimeAnim = 50;
+	run->duration = 72;
 	animations.push_back(run);
 
 
@@ -276,6 +275,7 @@ void C_Animator::SetAnimation(ResourceAnimation* anim)
 	attack->animationName = "Attack";
 	attack->initTimeAnim = 73;
 	attack->duration = 120;
+	attack->loopable = false;
 	animations.push_back(attack);
 }
 
@@ -344,7 +344,7 @@ Quat C_Animator::GetChannelRotation(const Channel& channel, float currentKey, Qu
 		std::map<double, Quat>::const_iterator previous = channel.GetPrevRotKey(currentKey);
 		std::map<double, Quat>::const_iterator next = channel.GetNextRotKey(currentKey);
 
-		if (previous->first == -1) return rotation;
+		if (channel.rotationKeys.begin()->first == -1) return rotation;
 
 		if (next == channel.rotationKeys.end())
 			next = previous;
@@ -372,7 +372,7 @@ float3 C_Animator::GetChannelPosition(const Channel& channel, float currentKey, 
 		std::map<double, float3>::const_iterator previous = channel.GetPrevPosKey(currentKey);
 		std::map<double, float3>::const_iterator next = channel.GetNextPosKey(currentKey);
 
-		if (previous->first == -1) return position;
+		if (channel.positionKeys.begin()->first == -1) return position;
 
 		if (next == channel.positionKeys.end())
 			next = previous;
@@ -401,7 +401,7 @@ float3 C_Animator::GetChannelScale(const Channel & channel, float currentKey, fl
 		std::map<double, float3>::const_iterator previous = channel.GetPrevScaleKey(currentKey);
 		std::map<double, float3>::const_iterator next = channel.GetPrevScaleKey(currentKey);
 
-		if (previous->first == -1) return scale;
+		if (channel.scaleKeys.begin()->first == -1) return scale;
 
 		if (next == channel.scaleKeys.end())
 			next = previous;
