@@ -101,10 +101,12 @@ void ModelImporter::Import(char* buffer, int bSize, Resource* res)
 				else
 					animationsOnModelUIDs.push_back(AnimationLoader::LoadAnimation(anim));	
 			}
+
+			SaveAnimationsToMeta(res->GetAssetPath(), animationsOnModelUIDs);
+			EngineExternal->moduleResources->UpdateAnimationsDisplay();
 		}
 
-		SaveAnimationsToMeta(res->GetAssetPath(), animationsOnModelUIDs);
-		EngineExternal->moduleResources->UpdateAnimationsDisplay();
+
 
 
 		//Save custom format model

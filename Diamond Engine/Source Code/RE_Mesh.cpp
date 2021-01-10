@@ -19,47 +19,39 @@ bool ResourceMesh::LoadToMemory()
 	LOG(LogType::L_WARNING, "Mesh loaded to memory");
 	LoadCustomFormat(GetLibraryPath());
 
-	//Create a vertex array object which will hold all buffer objects
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
+	// vertices_count = vector3's // size of the array (elements) = vertices_count * 3 // size of the array in bytes = sizeof(float) * vertices_count * 3
+	if (vertices_count != 0)
+	{
+		glGenBuffers(1, (GLuint*) & (vertices_id));
+		glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, &vertices[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
 
-	//Create a vertex buffer object to hold vertex positions
-	glGenBuffers(1, (GLuint*)&vertices_id);
-	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, vertices, GL_STATIC_DRAW);
+	if (indices_count != 0)
+	{
+		// indices_count = elements // size of the array (elements) = indices_count // size of the array in bytes = sizeof(uint) * indices_count
+		glGenBuffers(1, (GLuint*) & (indices_id));
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices_count, &indices[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
 
-	//Create an element buffer object to hold indices
-	glGenBuffers(1, (GLuint*)&indices_id);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices_count, indices, GL_STATIC_DRAW);
+	if (normals_count != 0)
+	{
+		glGenBuffers(1, (GLuint*) & (normalbuffer_id));
+		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, &normals[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
 
-	//Set the vertex attrib pointer
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	//Create the array buffer for tex coords and enable attrib pointer
-	if (texCoords_count > 0)
+	if (texCoords_count != 0)
 	{
 		glGenBuffers(1, (GLuint*)&texCoords_id);
 		glBindBuffer(GL_ARRAY_BUFFER, texCoords_id);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * texCoords_count * 2, texCoords, GL_STATIC_DRAW);
-
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
-
-	//Create the array buffer for normals and enable attrib pointer
-	if (normals_count > 0)
-	{
-		glGenBuffers(1, (GLuint*)&normalbuffer_id);
-		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, normals, GL_STATIC_DRAW);
-
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(2);
-	}
-
-	glBindVertexArray(0);
 	return true;
 }
 
@@ -119,8 +111,6 @@ void ResourceMesh::RenderMesh(GLuint textureID)
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, texCoords_id);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-		//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
-		//glEnableVertexAttribArray(1);
 	}
 	//--------------------------------------------
 
@@ -130,8 +120,6 @@ void ResourceMesh::RenderMesh(GLuint textureID)
 		glEnableClientState(GL_NORMAL_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
 		glNormalPointer(GL_FLOAT, 0, NULL);
-		//glEnableVertexAttribArray(2);
-		//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	}
 	//--------------------------------------------
 
@@ -227,56 +215,43 @@ vec3 ResourceMesh::GetVectorFromIndex(float* startValue)
 	return vec3(x, y, z);
 }
 
-void ResourceMesh::LoadSkinnedBuffers(bool init)
+void ResourceMesh::RegenerateBuffers(bool init)
 {
 	if (init)
 	{
-		//Create a vertex array object which will hold all buffer objects
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
-
-		//Create a vertex buffer object to hold vertex positions
+		//Vertex buffer
 		glGenBuffers(1, (GLuint*)&vertices_id);
 
-		//Create an element buffer object to hold indices
+		//Indices buffer
 		glGenBuffers(1, (GLuint*)&indices_id);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_id);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices_count, indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices_count, &indices[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		//Set the vertex attrib pointer
-		glEnableVertexAttribArray(0);
-
-		//Create the array buffer for tex coords and enable attrib pointer
+		//TexCoords buffer
 		if (texCoords_count > 0)
 		{
 			glGenBuffers(1, (GLuint*)&texCoords_id);
 			glBindBuffer(GL_ARRAY_BUFFER, texCoords_id);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * texCoords_count * 2, texCoords, GL_STATIC_DRAW);
-
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-			glEnableVertexAttribArray(1);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
-
+		//Normals buffer
 		glGenBuffers(1, (GLuint*)&normalbuffer_id);
 	}
 
-	glBindVertexArray(VAO);
-
+	//Set vertex buffers
 	glBindBuffer(GL_ARRAY_BUFFER, vertices_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, vertices, GL_STREAM_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count * 3, &vertices[0], GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	//Create the array buffer for normals and enable attrib pointer
+	//Set normals buffers
 	if (normals_count > 0)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer_id);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, normals, GL_STREAM_DRAW);
-
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(2);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normals_count * 3, &normals[0], GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-
-	glBindVertexArray(0);
 }
 
 #pragma region Sphere generation

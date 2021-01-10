@@ -153,9 +153,11 @@ bool C_Animator::OnEditor()
 
 			ImGui::Spacing();
 
-			if (ImGui::Button("Link channels to bones")) {
+			if (ImGui::Button("Link/Unlink channels to bones")) {
 				//LinkChannelBones(gameObject);
 				playing = !playing;
+				channeIsLinked = !channeIsLinked;
+				bonesLinked = bonesLinked;
 
 			}
 		
@@ -246,11 +248,11 @@ void C_Animator::UpdateMeshAnimation(GameObject* gameObject)
 	C_MeshRenderer* mesh = dynamic_cast<C_MeshRenderer*>( gameObject->GetComponent(Component::Type::MeshRenderer));
 	if (mesh != nullptr)
 	{
-		mesh->StartBoneDeformation();
-		mesh->DeformAnimMesh();
-		//App->renderer3D->LoadBuffers(mesh->animMesh);
+		mesh->DuplicateMeshintoAnimable();
+		mesh->MoveVerticesnNormals();
 	}
 
+	// eudald: Necessary?
 	for (uint i = 0; i < gameObject->children.size(); i++)
 		UpdateMeshAnimation(gameObject->children[i]);
 }

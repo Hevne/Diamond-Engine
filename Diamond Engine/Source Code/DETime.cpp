@@ -1,4 +1,5 @@
 #include "DETime.h"
+#include "MO_Scene.h"
 
 
 float DETime::time;

@@ -1,0 +1,37 @@
+{
+    "Model Objects": [
+        {
+            "name": "Monkey",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                -0.7071068286895752,
+                0,
+                0,
+                0.70710670948028564
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1180074917,
+            "ParentUID": 583024784,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/158831047.mmh",
+                    "UID": 158831047
+                }
+            ]
+        }
+    ]
+}

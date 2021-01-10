@@ -19,6 +19,7 @@
 #include"MaykMath.h"
 #include"CO_Transform.h"
 #include"CO_Camera.h"
+#include "CO_Animator.h"
 
 #include"DETime.h"
 
@@ -119,6 +120,17 @@ void M_Scene::UpdateGameObjects(float dt)
 	RecursiveUpdate(root,dt);
 }
 
+void M_Scene::PlayAnimations(GameObject* root)
+{
+	C_Animator* animator = dynamic_cast<C_Animator* >(root->GetComponent(Component::Type::Animator));
+
+	if (animator != nullptr)
+	{
+		animator->playing = true;
+	}
+	
+}
+
 void M_Scene::RecursiveUpdate(GameObject* parent, float dt)
 {
 	if (parent->toDelete)
@@ -131,6 +143,10 @@ void M_Scene::RecursiveUpdate(GameObject* parent, float dt)
 	{
 		parent->Update(dt);
 
+		if (DETime::state == GameState::PLAY)
+		{
+			PlayAnimations(parent);
+		}
 		for (size_t i = 0; i < parent->children.size(); i++)
 		{
 			RecursiveUpdate(parent->children[i],dt);

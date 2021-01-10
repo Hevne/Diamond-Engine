@@ -27,8 +27,9 @@ public:
 	ResourceMesh* GetRenderMesh();
 	ResourceMesh* GetRenderAnimableMesh();
 
-	void StartBoneDeformation();
-	void DeformAnimMesh();
+	void DuplicateMeshintoAnimable();
+	void MoveVerticesnNormals();
+	float4x4 CalculateDeltaMatrix(float4x4 globalMat, float4x4 invertMat);
 
 	void GetBoneMapping(std::map<std::string, GameObject*>& boneMapping);
 

@@ -1,0 +1,37 @@
+{
+    "Model Objects": [
+        {
+            "name": "Pyramid",
+            "Position": [
+                0,
+                0,
+                0
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Scale": [
+                1,
+                1,
+                1
+            ],
+            "UID": 1432731942,
+            "ParentUID": 549962205,
+            "Components": [
+                {
+                    "Type": 1,
+                    "Active": true
+                },
+                {
+                    "Type": 2,
+                    "Active": true,
+                    "Path": "Library\/Meshes\/2133981286.mmh",
+                    "UID": 2133981286
+                }
+            ]
+        }
+    ]
+}

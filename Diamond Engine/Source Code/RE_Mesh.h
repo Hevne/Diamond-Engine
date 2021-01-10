@@ -20,7 +20,7 @@ public:
 	~ResourceMesh();
 
 	bool LoadToMemory() override;
-	void LoadSkinnedBuffers(bool init=false);
+	void RegenerateBuffers(bool init=false);
 	bool UnloadFromMemory() override;
 
 	void RenderMesh(GLuint textureID);
