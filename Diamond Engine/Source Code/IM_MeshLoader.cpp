@@ -277,7 +277,7 @@ void MeshLoader::LoadBones(const aiMesh* importedMesh, ResourceMesh* ourMesh)
 				if (ourMesh->bones[index * 4 + j] == -1)
 				{
 					ourMesh->bones[index * 4 + j] = boneIndex;
-					ourMesh->boneWeights[index + 4 + j] = bone->mWeights[i].mWeight;
+					ourMesh->boneWeights[index * 4 + j] = bone->mWeights[i].mWeight;
 					break;
 				}
 			}

@@ -79,10 +79,33 @@ void C_MeshRenderer::RenderMesh()
 	if (_animableMesh != nullptr && dynamic_cast<C_Animator*>(gameObject->parent->GetComponent(Component::Type::Animator))->playing)
 	{
 		 _animableMesh->RenderMesh(id);
+		 //for (uint v = 0; v < _animableMesh->vertices_count; v++)
+		 //{
+			// float3 vertexV(_animableMesh->vertices[v * 3], _animableMesh->vertices[v * 3 + 1], _animableMesh->vertices[v * 3 + 2]);
+			// glColor3f(1.f, 0.f, 1.f);
+			// glPointSize(20.f);
+			// glBegin(GL_POINTS);
+			// glVertex3f(vertexV.x, vertexV.y, vertexV.z);
+			// glEnd();
+			// glPointSize(1.f);
+			// glColor3f(1.f, 1.f, 1.f);
+		 //}
+		 
 	}
 	else
 	{
 		_mesh->RenderMesh(id);
+		//for (uint v = 0; v < _mesh->vertices_count; v++)
+		//{
+		//	float3 vertexV(_mesh->vertices[v * 3], _mesh->vertices[v * 3 + 1], _mesh->vertices[v * 3 + 2]);
+		//	glColor3f(1.f, 0.f, 1.f);
+		//	glPointSize(20.f);
+		//	glBegin(GL_POINTS);
+		//	glVertex3f(vertexV.x, vertexV.y, vertexV.z);
+		//	glEnd();
+		//	glPointSize(1.f);
+		//	glColor3f(1.f, 1.f, 1.f);
+		//}
 	}
 
 	
@@ -307,12 +330,18 @@ void C_MeshRenderer::DeformAnimMesh()
 
 		if (bone != nullptr)
 		{
+			float3 position;
+			Quat rotation;
+			float3 scale;
 			//TODO: Here we are just picking bone global transform, we need the bone transform matrix
-			
-			float4x4 mat = dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
+			float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
+			mat = mat * dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
+			mat.Decompose(position, rotation, scale);
 			mat = dynamic_cast<C_Transform*>(gameObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted()* mat;
+			mat.Decompose(position, rotation, scale);
 
 			mat = mat * rMesh->bonesOffsets[it->second];
+			mat.Decompose(position, rotation, scale);
 			boneTransforms[it->second] = mat;
 		}
 	}
@@ -333,9 +362,14 @@ void C_MeshRenderer::DeformAnimMesh()
 			//Transforming original mesh vertex with bone transformation matrix
 			float3 toAdd = boneTransforms[boneID].TransformPos(float3(&rMesh->vertices[v * 3]));
 
+			float3 vertexV(_animableMesh->vertices[v * 3], _animableMesh->vertices[v * 3 + 1], _animableMesh->vertices[v * 3 + 2]);
+
 			_animableMesh->vertices[v * 3] += toAdd.x * boneWeight;
 			_animableMesh->vertices[v * 3 + 1] += toAdd.y * boneWeight;
 			_animableMesh->vertices[v * 3 + 2] += toAdd.z * boneWeight;
+
+
+			float3 vertexF(_animableMesh->vertices[v * 3], _animableMesh->vertices[v * 3 + 1], _animableMesh->vertices[v * 3 + 2]);
 
 			if (rMesh->normals_count > 0)
 			{
