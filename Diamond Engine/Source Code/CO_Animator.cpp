@@ -75,7 +75,7 @@ void C_Animator::Update(float dt)
 		}
 
 		UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
-		UpdateMeshAnimation(gameObject->children[0]);
+		//UpdateMeshAnimation(gameObject->children[0]);
 		std::vector<GameObject*> bones;
 		rootBone->CollectChilds(bones);
 		DrawBones(bones[0]);
@@ -350,6 +350,10 @@ void C_Animator::DrawBones(GameObject* gameObject)
 	Quat rotation;
 	float3 scale;
 
+	if (gameObject->parent != nullptr) {
+		gameObject->parent->transform->globalTransform.Decompose(position, rotation, scale);
+		glVertex3f(position.x, position.y, position.z);
+	}
 	gameObject->transform->globalTransform.Decompose(position, rotation, scale);
 	glVertex3f(position.x, position.y, position.z);
 	//LOG(LogType::L_NORMAL, "Name: %s  %f,%f,%f",bones->first.c_str(), position.x, position.y, position.z);
