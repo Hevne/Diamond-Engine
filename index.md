@@ -36,37 +36,22 @@ Later, we use our bones information to link the mesh vertices and normals in ord
 
 <iframe src="https://giphy.com/embed/NWRjNcmIMKBbKqewdk" width="240" height="183" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/NWRjNcmIMKBbKqewdk">via GIPHY</a> </p><iframe src="https://giphy.com/embed/wZb8WqoFQl90ebgBxf" width="240" height="165" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/wZb8WqoFQl90ebgBxf">via GIPHY</a></p>
 
-
-
-
 ### Short Video
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UiCn6oklN3A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-```markdown
-Syntax highlighted code block
+### License
 
-# Header 1
-## Header 2
-### Header 3
+Diamond Engine, lightweight 3D game engine software.
 
-- Bulleted
-- List
+Copyright (C) 2020 Miquel Suau Gonzalez
 
-1. Numbered
-2. List
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-**Bold** and _Italic_ and `Code` text
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
 
-[Link](url) and ![Image](src)
-```
+You should have received a copy of the GNU Affero General Public License along with this program. If not, see https://github.com/MayKoder/Diamond-Engine/blob/master/LICENSE.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Hevne/Diamond-Engine/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Contact at GitHub: https://github.com/MayKoder
+Contact at LinkedIn: https://www.linkedin.com/mwlite/in/miquel-suau-gonzalez
+Contact at Gmail: sg.miquel@gmail.com
