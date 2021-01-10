@@ -45,7 +45,7 @@ Later, we use our bones information to link the mesh vertices and normals in ord
 
 ### Short Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gVWwtn0V9NE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_wn7CME9-t4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### License
 
