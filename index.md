@@ -14,11 +14,11 @@ Unknown Engine team, the one at charge of implementing the Skeletal Animation sy
 
 - Eudald Garrofé Flix
 
-<img src="Web_Pics/eudald_pic.png"><br>
+<img src="eudald_pic.png"><br>
 
 - Jordi Pardo Gutiérrez
 
-<img src="Web_Pics/jordi_pic.png"><br>
+<img src="jordi_pic.png"><br>
 
 
 ### Skeletal Animation System
