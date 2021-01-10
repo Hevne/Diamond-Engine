@@ -53,6 +53,7 @@ public:
 	float ticksPerSecond;
 	bool loopable = true;
 	uint numChannels;
+	uint initTimeAnim = 0;
 
 	std::map<std::string, Channel> channels;
 };

@@ -2,6 +2,7 @@
 #include "RE_Animation.h"
 #include "OpenGL.h"
 
+#include "MO_Input.h"
 #include "Application.h"
 #include "MO_Renderer3D.h"
 #include "IM_FileSystem.h"
@@ -51,6 +52,9 @@ void C_Animator::Start()
 	{
 		boneMapping[bones[i]->name] = bones[i];
 	}
+
+	currentAnimation = animations[0];
+	started = true;
 }
 
 void C_Animator::Update(float dt)
@@ -59,14 +63,52 @@ void C_Animator::Update(float dt)
 		if (started == false) {
 			Start();
 		}
+		
+		if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_2) == KEY_STATE::KEY_REPEAT) {
+			currentAnimation = animations[1];
+		}
+		else if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_2) == KEY_STATE::KEY_UP) {
+			currentAnimation = animations[0];
+		}
 
-		ResourceAnimation* currentAnimation = _anim;
+		if (EngineExternal->moduleInput->GetKey(SDL_SCANCODE_1) == KEY_STATE::KEY_DOWN) {
+			currentAnimation = animations[2];
+		}
+
+
+		//Updating animation blend
+		float blendRatio = 0.0f;
+		if (blendTimeDuration > 0.0f)
+		{
+			prevAnimTime += dt;
+			previousTimeAnimation = time * previousAnimation->ticksPerSecond;
+			previousTimeAnimation += previousAnimation->initTimeAnim;
+			blendTime += dt;
+
+			if (blendTime >= blendTimeDuration)
+			{
+				blendTimeDuration = 0.0f;
+			}
+			else if (previousAnimation && prevAnimTime >= previousAnimation->duration)
+			{
+				if (previousAnimation->loopable == true)
+				{
+					prevAnimTime = 0.0f;
+					// + (currentFrame - endFrame);
+				}
+			}
+
+			if (blendTimeDuration > 0.0f)
+				blendRatio = blendTime / blendTimeDuration;
+		}
+		//Endof Updating animation blend
 
 		time += dt;
 		currentTimeAnimation = time * currentAnimation->ticksPerSecond;
-		if (currentAnimation && currentTimeAnimation > currentAnimation->duration) {
+		currentTimeAnimation += currentAnimation->initTimeAnim;
+		if (currentAnimation && currentTimeAnimation >= currentAnimation->duration) {
 			if (currentAnimation->loopable == true) {
-				time = 0.0f;
+				time = 0.f;
 			}
 			else {
 				playing = false;
@@ -74,7 +116,7 @@ void C_Animator::Update(float dt)
 			}
 		}
 
-		UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
+		UpdateChannelsTransform(currentAnimation, blendRatio > 0.0f ?previousAnimation : nullptr, blendRatio);
 		UpdateMeshAnimation(gameObject->children[0]);
 		std::vector<GameObject*> bones;
 		rootBone->CollectChilds(bones);
@@ -124,7 +166,18 @@ bool C_Animator::OnEditor()
 			ImGui::Text("Previous Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%f", prevAnimTime);
 			ImGui::Text("Current Animation Time: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", currentTimeAnimation);
 			ImGui::Text("blendTime: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(1.f, 1.f, 0.f, 1.f), "%i", blendTime);
-
+			if (ImGui::Button("Idle animation")) {
+				currentAnimation = animations[0];
+				time = 0.f;
+			}
+			if (ImGui::Button("Run animation")) {
+				currentAnimation = animations[1];
+				time = 0.f;
+			}
+			if (ImGui::Button("Attack animation")) {
+				currentAnimation = animations[2];
+				time = 0.f;
+			}
 			ImGui::Spacing();
 			if (playing)
 			{
@@ -194,11 +247,36 @@ void C_Animator::StoreBoneMapping(GameObject* gameObject)
 	}
 }
 
+void C_Animator::Pause()
+{
+	active = false;
+}
 
+void C_Animator::Resume()
+{
+	active = true;
+}
 
 void C_Animator::SetAnimation(ResourceAnimation* anim)
 {
 	_anim = anim;
+	_anim->animationName = "Idle";
+	_anim->initTimeAnim = 0;
+	_anim->duration = 46;
+	animations.push_back(_anim);
+
+	ResourceAnimation* run = new ResourceAnimation(*_anim);
+	run->animationName = "Run";
+	run->initTimeAnim = 48;
+	run->duration = 71;
+	animations.push_back(run);
+
+
+	ResourceAnimation* attack = new ResourceAnimation(*_anim);
+	attack->animationName = "Attack";
+	attack->initTimeAnim = 73;
+	attack->duration = 120;
+	animations.push_back(attack);
 }
 
 void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, const ResourceAnimation* blend, float blendRatio)
@@ -210,7 +288,7 @@ void C_Animator::UpdateChannelsTransform(const ResourceAnimation* settings, cons
 	{
 		prevBlendFrame = blend->ticksPerSecond * prevAnimTime;
 	}
-
+	LOG(LogType::L_NORMAL, "%i", currentFrame);
 	std::map<std::string, GameObject*>::iterator boneIt;
 	for (boneIt = boneMapping.begin(); boneIt != boneMapping.end(); ++boneIt)
 	{

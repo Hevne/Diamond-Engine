@@ -68,7 +68,8 @@ public:
 	uint previous_animation = 0;
 	uint current_animation = 0;
 	bool playing = false;
-
+	void Pause();
+	void Resume();
 private:
 	bool started = false;
 
@@ -81,8 +82,12 @@ private:
 	bool bonesLinked = false;
 
 	uint currentTimeAnimation = 0;
+	uint previousTimeAnimation = 0;
 
 private:
 	ResourceAnimation* _anim;
+	ResourceAnimation* currentAnimation = nullptr;
+	ResourceAnimation* previousAnimation = nullptr;
+	std::vector<ResourceAnimation*> animations;
 };
 
