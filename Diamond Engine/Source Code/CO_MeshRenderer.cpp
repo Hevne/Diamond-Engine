@@ -334,8 +334,8 @@ void C_MeshRenderer::DeformAnimMesh()
 			Quat rotation;
 			float3 scale;
 			//TODO: Here we are just picking bone global transform, we need the bone transform matrix
-			float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
-			mat = mat * dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
+			//dynamic_cast<C_Transform*>(rootBone->parent->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
+			float4x4 mat  = dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
 			mat.Decompose(position, rotation, scale);
 			mat = dynamic_cast<C_Transform*>(gameObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted()* mat;
 			mat.Decompose(position, rotation, scale);
