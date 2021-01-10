@@ -74,8 +74,8 @@ void C_Animator::Update(float dt)
 			}
 		}
 
-		UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
-		//UpdateMeshAnimation(gameObject->children[0]);
+		//UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
+		UpdateMeshAnimation(gameObject->children[0]);
 		std::vector<GameObject*> bones;
 		rootBone->CollectChilds(bones);
 		DrawBones(bones[0]);
@@ -155,7 +155,8 @@ bool C_Animator::OnEditor()
 
 			if (ImGui::Button("Link channels to bones")) {
 				//LinkChannelBones(gameObject);
-				playing = true;
+				playing = !playing;
+
 			}
 		
 

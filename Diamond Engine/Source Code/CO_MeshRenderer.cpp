@@ -11,6 +11,7 @@
 #include "CO_Material.h"
 #include "CO_Transform.h"
 #include"CO_Camera.h"
+#include "CO_Animator.h"
 
 #include "ImGui/imgui.h"
 #include"DEJsonSupport.h"
@@ -75,7 +76,7 @@ void C_MeshRenderer::RenderMesh()
 	if (material != nullptr && material->IsActive())
 		id = material->GetTextureID();
 
-	if (_animableMesh != nullptr)
+	if (_animableMesh != nullptr && dynamic_cast<C_Animator*>(gameObject->parent->GetComponent(Component::Type::Animator))->playing)
 	{
 		 _animableMesh->RenderMesh(id);
 	}
@@ -279,9 +280,10 @@ void C_MeshRenderer::StartBoneDeformation()
 		memset(_animableMesh->normals, 0, _animableMesh->texCoords_count * sizeof(float) * 2);
 	}
 
-	if (newMesh)
+	if (newMesh) {
 		//SetRenderMesh(GetRenderAnimableMesh());
 		_animableMesh->LoadSkinnedBuffers(true); // Load buffers eudald
+	}
 }
 
 void C_MeshRenderer::DeformAnimMesh()
