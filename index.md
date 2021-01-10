@@ -50,7 +50,7 @@ Later, we use our bones information to link the mesh vertices and normals in ord
 
 [Repository](https://github.com/Hevne/Diamond-Engine)
 
-[Release](https://github.com/Hevne)
+[Release](https://github.com/Hevne/Diamond-Engine/releases/tag/v0.2.1)
 
 ### License
 
