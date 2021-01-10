@@ -37,7 +37,7 @@ C_Animator::~C_Animator()
 void C_Animator::Start()
 {
 	//hard coded first bone
-	rootBone = gameObject->children[1]->children[0];
+	rootBone = gameObject->children[1]/*->children[0]*/;
 	dynamic_cast<C_MeshRenderer*>(gameObject->children[0]->GetComponent(Component::Type::MeshRenderer))->rootBone = rootBone;
 
 	if (rootBone == nullptr) return;

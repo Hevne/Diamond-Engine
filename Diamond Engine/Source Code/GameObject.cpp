@@ -268,19 +268,19 @@ void GameObject::CollectChilds(std::vector<GameObject*>& vector)
 		children[i]->CollectChilds(vector);
 }
 
-void GameObject::GetBoneChildTransforms()
-{
-	//Get the component and resource mesh;
-	GameObject* meshObject = GetFirstChild();
-	
-	C_MeshRenderer* co_mesh = nullptr;
-	co_mesh = dynamic_cast<C_MeshRenderer*>(meshObject->GetComponent(Component::Type::MeshRenderer));
-	
-	ResourceMesh* animablemesh = co_mesh->GetRenderAnimableMesh();
-
-	//Recursively check bonemap and assign transforms
-	RecursiveGetBones(animablemesh, this, meshObject);
-}
+//void GameObject::GetBoneChildTransforms()
+//{
+//	//Get the component and resource mesh;
+//	GameObject* meshObject = GetFirstChild();
+//	
+//	C_MeshRenderer* co_mesh = nullptr;
+//	co_mesh = dynamic_cast<C_MeshRenderer*>(meshObject->GetComponent(Component::Type::MeshRenderer));
+//	
+//	ResourceMesh* animablemesh = co_mesh->GetRenderAnimableMesh();
+//
+//	//Recursively check bonemap and assign transforms
+//	RecursiveGetBones(animablemesh, this, meshObject);
+//}
 
 C_MeshRenderer* GameObject::GetMesh()
 {
@@ -291,58 +291,58 @@ C_MeshRenderer* GameObject::GetMesh()
 	return co_mesh;
 }
 
-void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root, GameObject* meshObject)
-{
-			if ((animablemesh->bonesMap.find(root->name.c_str()) != (animablemesh->bonesMap.end())))
-			{
-				uint bone_ID = animablemesh->bonesMap.find(root->name.c_str())->second;
+//void GameObject::RecursiveGetBones(ResourceMesh* animablemesh, GameObject* root, GameObject* meshObject)
+//{
+//			if ((animablemesh->bonesMap.find(root->name.c_str()) != (animablemesh->bonesMap.end())))
+//			{
+//				uint bone_ID = animablemesh->bonesMap.find(root->name.c_str())->second;
+//
+//				C_Transform* transform = dynamic_cast<C_Transform*>(root->GetComponent(Component::Type::Transform));
+//				animablemesh->bonesTransforms[bone_ID] = transform->GetGlobalMatrix();
+//
+//				float4x4 delta = CalculateDelta(dynamic_cast<C_Transform*>(meshObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix(), animablemesh->bonesTransforms[bone_ID], animablemesh->bonesOffsets[bone_ID]);
+//				//Iterate all mesh vertices
+//
+//				for (uint j = 0; j < animablemesh->bones_count; ++j)
+//				{
+//					//Iterate all 4 bones
+//					for (uint k = 0; k < 4; ++k)
+//					{
+//						int boneID = animablemesh->bones[j * 4 + k];
+//						float boneWeight = animablemesh->boneWeights[j * 4 + k];
+//				
+//						if (boneID == -1) continue;
+//				
+//						float3 vertex = delta.TransformPos(float3(&animablemesh->vertices[j * 3]));
+//				
+//						animablemesh->vertices[j * 3] += vertex.x * boneWeight;
+//						animablemesh->vertices[j * 3 + 1] += vertex.y * boneWeight;
+//						animablemesh->vertices[j * 3 + 2] += vertex.z * boneWeight;
+//						LOG(LogType::L_ERROR, "J: %i", j);
+//				
+//						if (animablemesh->normals_count > 0) {
+//							float3 normal = delta.TransformPos(float3(&animablemesh->normals[j * 3]));
+//							animablemesh->normals[j * 3] += normal.x * boneWeight;
+//							animablemesh->normals[j * 3 + 1] += normal.y * boneWeight;
+//							animablemesh->normals[j * 3 + 2] += normal.z * boneWeight;
+//						}
+//					}
+//				}
+//			}	
+//
+//			for (int i = 0; i < root->children.size(); i++)
+//			{
+//				RecursiveGetBones(animablemesh, root->children[i], meshObject);
+//			}
+//}
 
-				C_Transform* transform = dynamic_cast<C_Transform*>(root->GetComponent(Component::Type::Transform));
-				animablemesh->bonesTransforms[bone_ID] = transform->GetGlobalMatrix();
-
-				float4x4 delta = CalculateDelta(dynamic_cast<C_Transform*>(meshObject->GetComponent(Component::Type::Transform))->GetGlobalMatrix(), animablemesh->bonesTransforms[bone_ID], animablemesh->bonesOffsets[bone_ID]);
-				//Iterate all mesh vertices
-
-				for (uint j = 0; j < animablemesh->bones_count; ++j)
-				{
-					//Iterate all 4 bones
-					for (uint k = 0; k < 4; ++k)
-					{
-						int boneID = animablemesh->bones[j * 4 + k];
-						float boneWeight = animablemesh->boneWeights[j * 4 + k];
-				
-						if (boneID == -1) continue;
-				
-						float3 vertex = delta.TransformPos(float3(&animablemesh->vertices[j * 3]));
-				
-						animablemesh->vertices[j * 3] += vertex.x * boneWeight;
-						animablemesh->vertices[j * 3 + 1] += vertex.y * boneWeight;
-						animablemesh->vertices[j * 3 + 2] += vertex.z * boneWeight;
-						LOG(LogType::L_ERROR, "J: %i", j);
-				
-						if (animablemesh->normals_count > 0) {
-							float3 normal = delta.TransformPos(float3(&animablemesh->normals[j * 3]));
-							animablemesh->normals[j * 3] += normal.x * boneWeight;
-							animablemesh->normals[j * 3 + 1] += normal.y * boneWeight;
-							animablemesh->normals[j * 3 + 2] += normal.z * boneWeight;
-						}
-					}
-				}
-			}	
-
-			for (int i = 0; i < root->children.size(); i++)
-			{
-				RecursiveGetBones(animablemesh, root->children[i], meshObject);
-			}
-}
-
-float4x4 GameObject::CalculateDelta(float4x4 meshGlobal, float4x4 boneGlobal, float4x4 Offset)
-{
-	float4x4 meshInverted = meshGlobal.Inverted();
-	float4x4 boneLocal = meshInverted * boneGlobal;
-	float4x4 Delta = boneLocal * Offset;
-	return Delta;
-}
+//float4x4 GameObject::CalculateDelta(float4x4 meshGlobal, float4x4 boneGlobal, float4x4 Offset)
+//{
+//	float4x4 meshInverted = meshGlobal.Inverted();
+//	float4x4 boneLocal = meshInverted * boneGlobal;
+//	float4x4 Delta = boneLocal * Offset;
+//	return Delta;
+//}
 
 
 GameObject* GameObject::GetFirstChild()

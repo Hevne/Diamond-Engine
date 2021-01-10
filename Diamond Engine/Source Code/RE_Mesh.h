@@ -29,7 +29,7 @@ public:
 	vec3 GetVectorFromIndex(float* startValue);
 
 public:
-
+	uint VAO = 0;
 	uint indices_id = 0; // index in VRAM
 	uint indices_count = 0;
 	uint* indices = nullptr;

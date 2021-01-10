@@ -56,7 +56,7 @@ void C_MeshRenderer::Update(float dt)
 
 void C_MeshRenderer::RenderMesh()
 {
-	if (_mesh == nullptr && _animableMesh==nullptr)
+	if (_mesh == nullptr)
 		return;
 
 
@@ -75,19 +75,28 @@ void C_MeshRenderer::RenderMesh()
 	if (material != nullptr && material->IsActive())
 		id = material->GetTextureID();
 
-	ResourceMesh* meshRender;
 	if (_animableMesh != nullptr)
 	{
-		meshRender = _animableMesh;
+		 _animableMesh->RenderMesh(id);
 	}
 	else
 	{
-		meshRender = _mesh;
+		_mesh->RenderMesh(id);
 	}
-	meshRender->RenderMesh(id);
+
+	
 
 	if (vertexNormals || faceNormals)
-		meshRender->RenderMeshDebug(&vertexNormals, &faceNormals);
+	{
+		if (_animableMesh != nullptr)
+		{
+			_animableMesh->RenderMeshDebug(&vertexNormals, &faceNormals);
+		}
+		else
+		{
+			_mesh->RenderMeshDebug(&vertexNormals, &faceNormals);
+		}
+	}
 
 	if (transform != nullptr)
 		glPopMatrix();
@@ -271,6 +280,7 @@ void C_MeshRenderer::StartBoneDeformation()
 	}
 
 	if (newMesh)
+		//SetRenderMesh(GetRenderAnimableMesh());
 		_animableMesh->LoadSkinnedBuffers(true); // Load buffers eudald
 }
 
@@ -296,7 +306,7 @@ void C_MeshRenderer::DeformAnimMesh()
 		if (bone != nullptr)
 		{
 			//TODO: Here we are just picking bone global transform, we need the bone transform matrix
-			float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
+			float4x4 mat = dynamic_cast<C_Transform*>(rootBone->parent->GetComponent(Component::Type::Transform))->GetGlobalMatrix().Inverted();
 			mat = mat * dynamic_cast<C_Transform*>(bone->GetComponent(Component::Type::Transform))->GetGlobalMatrix();
 			mat = dynamic_cast<C_Transform*>(gameObject->GetComponent(Component::Type::Transform))->localTransform.Inverted()* mat;
 
