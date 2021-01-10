@@ -37,8 +37,8 @@ C_Animator::~C_Animator()
 void C_Animator::Start()
 {
 	//hard coded first bone
-	rootBone = gameObject->children[0]->children[1];
-	dynamic_cast<C_MeshRenderer*>(gameObject->children[1]->GetComponent(Component::Type::MeshRenderer))->rootBone = rootBone;
+	rootBone = gameObject->children[1]->children[0];
+	dynamic_cast<C_MeshRenderer*>(gameObject->children[0]->GetComponent(Component::Type::MeshRenderer))->rootBone = rootBone;
 
 	if (rootBone == nullptr) return;
 
@@ -75,7 +75,7 @@ void C_Animator::Update(float dt)
 		}
 
 		UpdateChannelsTransform(currentAnimation, nullptr, 0.f);
-		UpdateMeshAnimation(gameObject->children[1]);
+		UpdateMeshAnimation(gameObject->children[0]);
 		std::vector<GameObject*> bones;
 		rootBone->CollectChilds(bones);
 		DrawBones(bones[0]);
