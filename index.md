@@ -34,7 +34,7 @@ Our system for this assignment consists on reading the animations inside an FBX,
 Later, we use our bones information to link the mesh vertices and normals in order to skin our mesh with the bones movement. Also, we control the state of the current animation playing on the scene using play/stop/pause from the editor.
 
 
-<iframe src="https://giphy.com/embed/NWRjNcmIMKBbKqewdk" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/NWRjNcmIMKBbKqewdk">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/NWRjNcmIMKBbKqewdk" width="240" height="183" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/NWRjNcmIMKBbKqewdk">via GIPHY</a></p>
 
 
 
