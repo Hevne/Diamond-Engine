@@ -20,6 +20,7 @@ He also worked on the creation of the components, resources and relate the play/
 <img src="eudald_pic.png"><br>
 
 - Jordi Pardo Gutiérrez
+
 Jordi mainly focused on linking the animation using the loaded channels and worked on the whole skinning process.
 Also, he worked on dividing the animations and the blend between them.
 
