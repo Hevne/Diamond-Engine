@@ -131,6 +131,24 @@ void M_Scene::PlayAnimations(GameObject* root)
 	
 }
 
+void M_Scene::FreezeAnimations(GameObject* root)
+{
+	C_Animator* animator = dynamic_cast<C_Animator*>(root->GetComponent(Component::Type::Animator));
+	if (animator != nullptr)
+	{
+		if (animator->IsActive())
+		{
+			animator->Pause();
+			pauseAnimations = false;
+		}
+		else
+		{
+			animator->Resume();
+			pauseAnimations = false;
+		}
+	}
+}
+
 void M_Scene::RecursiveUpdate(GameObject* parent, float dt)
 {
 	if (parent->toDelete)
@@ -138,21 +156,29 @@ void M_Scene::RecursiveUpdate(GameObject* parent, float dt)
 		destroyList.push_back(parent);
 		return;
 	}
-
-	if (parent->isActive()) 
-	{
-		parent->Update(dt);
-
-		if (DETime::state == GameState::PLAY)
+		if (parent->isActive())
 		{
-			PlayAnimations(parent);
+
+			parent->Update(dt);
+
+			if (DETime::state == GameState::PLAY)
+			{
+				PlayAnimations(parent);
+			}
+			if (pauseAnimations)
+			{
+				if (DETime::state == GameState::PAUSE)
+				{
+					FreezeAnimations(parent);
+				}
+			}
+			for (size_t i = 0; i < parent->children.size(); i++)
+			{
+				RecursiveUpdate(parent->children[i], dt);
+			}
 		}
-		for (size_t i = 0; i < parent->children.size(); i++)
-		{
-			RecursiveUpdate(parent->children[i],dt);
-		}
-	}
 }
+
 
 void M_Scene::OnGUI()
 {

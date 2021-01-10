@@ -42,4 +42,6 @@ struct DETime
 	static Timer gameTimer;
 
 	static const char* GetStateString();
+
+	bool animationsPaused = false;
 };

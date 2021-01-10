@@ -7,6 +7,7 @@
 #include "CO_Camera.h"
 #include "CO_Animator.h"
 #include "RE_Mesh.h"
+#include "DETime.h"
 
 #include"MaykMath.h"
 #include"parson/parson.h"

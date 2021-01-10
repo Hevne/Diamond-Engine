@@ -44,6 +44,11 @@ private:
 
 	void UpdateGameObjects(float dt);
 	void PlayAnimations(GameObject* root);
+	void FreezeAnimations(GameObject* root);
 	void RecursiveUpdate(GameObject* parent,float dt);
 	GameObject* LoadGOData(JSON_Object* goJsonObj, GameObject* parent);
+
+public:
+
+	bool pauseAnimations = false;
 };

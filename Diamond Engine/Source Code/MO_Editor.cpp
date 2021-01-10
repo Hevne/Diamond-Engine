@@ -405,6 +405,7 @@ void M_Editor::DrawTopBar()
 
 			//Step one frame forward
 			if (ImGui::Button("Paus"))
+				App->moduleScene->pauseAnimations = true;
 				DETime::Pause();
 
 			ImGui::SameLine();
