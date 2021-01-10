@@ -14,12 +14,21 @@ Unknown Engine team, the one at charge of implementing the Skeletal Animation sy
 
 - Eudald Garrofé Flix
 
+<img src="https://github.com/Development-CITM/2D-Platformer/tree/master/Web_Pics/eudald_pic.png"><br>
+
 - Jordi Pardo Gutiérrez
+
+<img src="https://github.com/Development-CITM/2D-Platformer/tree/master/Web_Pics/jordi_pic.png"><br>
 
 
 ### Skeletal Animation System
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+
+### Short Video
+
+<iframe width="420" height="315" src="https://www.youtube.com/watch?v=UiCn6oklN3A"></iframe>
 
 ```markdown
 Syntax highlighted code block
