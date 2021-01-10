@@ -8,6 +8,20 @@ Diamond Engine is a fast C++ 3D game engine, developed with SDL2 and OpenGL. The
 
 Diamond Engine core is under Miquel Suau González's intellectual property. For this assignment and last deploy, we, the team of Unknown Engine have forked from Diamond Engine pre-last release and implemented an Skeleton Animation system.
 
+### Core sub-systems
+
+* Optimized 3D rendering
+* Camera Culling
+* Editor Docking
+* Script editor
+* GameObject & Component System
+* Multi-viewport Rendering
+* Memory managment
+* Time Managment
+* Resource Manager
+* Style Customization
+* Screenshoot System
+
 ### Our Team
 
 Unknown Engine team, the one at charge of implementing the Skeletal Animation system is formed by:
