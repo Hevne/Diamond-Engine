@@ -1,10 +1,23 @@
-## Welcome to GitHub Pages
+## Diamond Engine
 
-You can use the [editor on GitHub](https://github.com/Hevne/Diamond-Engine/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Diamond Engine is currently under active development as the "Engine Development" subject project for the CITM Bachelor's degree in Video Game Design and Development. Also hoping to be used as the base engine for the "Project 3" subject on the same degree. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Diamond Engine is a fast C++ 3D game engine, developed with SDL2 and OpenGL. The engine targets optimal memory management, fast starting and loading speeds and simple use. This will provide a fast, simple and powerful tool to prototype good looking games the fastest way possible.
 
-### Markdown
+### Collaboration with Unknown Engine Team
+
+Diamond Engine core is under Miquel Suau González's intellectual property. For this assignment and last deploy, we, the team of Unknown Engine have forked from Diamond Engine pre-last release and implemented an Skeleton Animation system.
+
+### Our Team
+
+Unknown Engine team, the one at charge of implementing the Skeletal Animation system is formed by:
+
+- Eudald Garrofé Flix
+
+- Jordi Pardo Gutiérrez
+
+
+### Skeletal Animation System
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
