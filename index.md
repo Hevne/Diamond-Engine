@@ -14,22 +14,21 @@ Unknown Engine team, the one at charge of implementing the Skeletal Animation sy
 
 - Eudald Garrofé Flix
 
+<img src="eudald_pic.png"><br>
+
 [GitHub: @Hevne](https://github.com/Hevne)
 
 Eudald has been working on importing animations data into the Engine resources system and saving it under our own custom format, same goes for loading them.
 He also worked on the creation of the components, resources and relate the play/stop/pause states to the animations.
 
-<img src="eudald_pic.png"><br>
-
 - Jordi Pardo Gutiérrez
+
+<img src="jordi_pic.png"><br>
 
 [GitHub: @Jordi-Pardo](https://github.com/Jordi-Pardo)
 
 Jordi mainly focused on linking the animation using the loaded channels and worked on the whole skinning process.
 Also, he worked on dividing the animations and the blend between them.
-
-<img src="jordi_pic.png"><br>
-
 
 ### Skeletal Animation System
 
