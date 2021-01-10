@@ -282,6 +282,7 @@ void C_MeshRenderer::StartBoneDeformation()
 		_animableMesh->normals_count = rMesh->normals_count;
 		_animableMesh->indices_count = rMesh->indices_count;
 		_animableMesh->texCoords_count = rMesh->texCoords_count;
+		_animableMesh->generalWireframe = rMesh->generalWireframe;
 
 		_animableMesh->vertices = new float[rMesh->vertices_count * 3];
 		_animableMesh->normals = new float[rMesh->normals_count * 3];
