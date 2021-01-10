@@ -1,6 +1,6 @@
 ## Diamond Engine
 
-Diamond Engine is currently under active development as the "Engine Development" subject project for the CITM Bachelor's degree in Video Game Design and Development. Also hoping to be used as the base engine for the "Project 3" subject on the same degree. 
+Diamond Engine is an engine from the "Engine Development" subject project for the CITM Bachelor's degree in Video Game Design and Development. Also hoping to be used as the base engine for the "Project 3" subject on the same degree. 
 
 Diamond Engine is a fast C++ 3D game engine, developed with SDL2 and OpenGL. The engine targets optimal memory management, fast starting and loading speeds and simple use. This will provide a fast, simple and powerful tool to prototype good looking games the fastest way possible.
 
@@ -36,7 +36,7 @@ Later, we use our bones information to link the mesh vertices and normals in ord
 
 <iframe src="https://giphy.com/embed/NWRjNcmIMKBbKqewdk" width="240" height="183" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/NWRjNcmIMKBbKqewdk">via GIPHY</a></p>
 
-
+<iframe src="https://giphy.com/embed/wZb8WqoFQl90ebgBxf" width="240" height="165" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/wZb8WqoFQl90ebgBxf">via GIPHY</a></p>
 
 
 ### Short Video
