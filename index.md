@@ -47,6 +47,11 @@ Later, we use our bones information to link the mesh vertices and normals in ord
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_wn7CME9-t4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+### Repository and Release
+
+[Repository](https://github.com/Hevne)
+[Release](https://github.com/Hevne)
+
 ### License
 
 Diamond Engine, lightweight 3D game engine software.
